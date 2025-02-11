@@ -33,7 +33,8 @@
           "recipes": [
             "cookielicious:chocolate_cookie_tiles"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

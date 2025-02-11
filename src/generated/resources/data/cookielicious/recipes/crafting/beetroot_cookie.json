@@ -14,10 +14,9 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "key": {
-          "R": {
-            "item": "seasonals:roasted_beetroot"
-          },
+          "R": [],
           "W": {
             "item": "minecraft:wheat"
           }
@@ -28,7 +27,8 @@
         "result": {
           "count": 8,
           "item": "cookielicious:beetroot_cookie"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

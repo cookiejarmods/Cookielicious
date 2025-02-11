@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "key": {
           "R": {
             "item": "neapolitan:roasted_adzuki_beans"
@@ -24,7 +25,8 @@
         "result": {
           "count": 8,
           "item": "cookielicious:adzuki_cookie"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

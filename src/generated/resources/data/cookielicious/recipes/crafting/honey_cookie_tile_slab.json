@@ -14,6 +14,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "building",
         "key": {
           "#": {
             "item": "cookielicious:honey_cookie_tiles"
@@ -25,7 +26,8 @@
         "result": {
           "count": 6,
           "item": "cookielicious:honey_cookie_tile_slab"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

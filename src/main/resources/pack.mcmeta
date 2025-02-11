@@ -1,6 +1,8 @@
 {
-    "pack": {
-        "description": "Cookielicious Resources",
-        "pack_format": 8
-	}
+  "pack": {
+    "description": {
+      "text": "Cookielicious Resources"
+    },
+    "pack_format": 15
+  }
 }

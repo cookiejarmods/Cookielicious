@@ -33,7 +33,8 @@
           "recipes": [
             "cookielicious:adzuki_cookie"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

@@ -14,10 +14,9 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "building",
         "key": {
-          "#": {
-            "item": "abnormals_delight:mulberry_cookie"
-          }
+          "#": []
         },
         "pattern": [
           "##",
@@ -26,7 +25,8 @@
         "result": {
           "count": 4,
           "item": "cookielicious:mulberry_cookie_tiles"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

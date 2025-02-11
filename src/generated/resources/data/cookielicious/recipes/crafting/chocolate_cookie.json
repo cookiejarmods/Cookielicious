@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "key": {
           "R": {
             "item": "neapolitan:chocolate_bar"
@@ -24,7 +25,8 @@
         "result": {
           "count": 8,
           "item": "cookielicious:chocolate_cookie"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

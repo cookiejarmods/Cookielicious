@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "key": {
           "R": {
             "item": "neapolitan:mint_leaves"
@@ -24,7 +25,8 @@
         "result": {
           "count": 8,
           "item": "cookielicious:mint_cookie"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

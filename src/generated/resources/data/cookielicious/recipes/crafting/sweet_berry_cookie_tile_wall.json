@@ -14,6 +14,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "building",
         "key": {
           "#": {
             "item": "cookielicious:sweet_berry_cookie_tiles"
@@ -26,7 +27,8 @@
         "result": {
           "count": 6,
           "item": "cookielicious:sweet_berry_cookie_tile_wall"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

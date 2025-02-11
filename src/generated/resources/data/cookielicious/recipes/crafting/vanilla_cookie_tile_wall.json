@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "building",
         "key": {
           "#": {
             "item": "cookielicious:vanilla_cookie_tiles"
@@ -22,7 +23,8 @@
         "result": {
           "count": 6,
           "item": "cookielicious:vanilla_cookie_tile_wall"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

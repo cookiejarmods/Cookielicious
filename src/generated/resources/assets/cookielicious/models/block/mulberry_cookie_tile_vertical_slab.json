@@ -1,8 +1,0 @@
-{
-  "parent": "cookielicious:block/vertical_slab",
-  "textures": {
-    "bottom": "cookielicious:block/mulberry_cookie_tiles",
-    "side": "cookielicious:block/mulberry_cookie_tiles",
-    "top": "cookielicious:block/mulberry_cookie_tiles"
-  }
-}

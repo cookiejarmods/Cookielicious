@@ -33,7 +33,8 @@
           "recipes": [
             "cookielicious:mint_cookie"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

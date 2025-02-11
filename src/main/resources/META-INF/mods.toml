@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[43,)"
+loaderVersion="[47,)"
 license="All rights reserved"
 issueTrackerURL="http://github.com/Evoslab/Cookielicious/issues"
 
@@ -21,27 +21,27 @@ configuredBackground= "cookielicious:textures/blocks/cookie_tiles.png" #configur
 [[dependencies.cookielicious]]
     modId="forge"
     mandatory=true
-    versionRange="[43,)"
+    versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.cookielicious]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.2,)"
+    versionRange="[1.20.1,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.cookielicious]]
     modId="neapolitan" 
     mandatory=true 
-    versionRange="[4.0.2,)"
+    versionRange="[5.0.0,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.cookielicious]]
     modId="blueprint"
     mandatory=true
-    versionRange="[6.1.2,)"
+    versionRange="[7.1,)"
     ordering="AFTER"
     side="BOTH"
