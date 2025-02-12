@@ -32,17 +32,34 @@ public class CookieliciousItems {
 	public static final ItemSubRegistryHelper HELPER = Cookielicious.REGISTRY_HELPER.getItemSubHelper();
 
 	public static final Map<ResourceKey<CreativeModeTab>, List<RegistryObject<? extends Item>>> TABS_FOR_ITEMS = new HashMap<>();
+	public static final List<RegistryObject<Item>> ALL_COOKIES = new ArrayList<>();
 
 
-	public static final RegistryObject<Item> VANILLA_COOKIE = createItem("vanilla_cookie", () -> new CookieItem(Properties.VANILLA), CreativeModeTabs.FOOD_AND_DRINKS);
-    public static final RegistryObject<Item> CHOCOLATE_COOKIE = createItem("chocolate_cookie", () -> new CookieItem(Properties.CHOCOLATE), CreativeModeTabs.FOOD_AND_DRINKS);
-    public static final RegistryObject<Item> STRAWBERRY_COOKIE = createItem("strawberry_cookie", () -> new HealingCookieItem(1F, Properties.STRAWBERRY), CreativeModeTabs.FOOD_AND_DRINKS);
-    public static final RegistryObject<Item> BANANA_COOKIE = createItem("banana_cookie", () -> new CookieItem(Properties.BANANA), CreativeModeTabs.FOOD_AND_DRINKS);
-    public static final RegistryObject<Item> MINT_COOKIE = createItem("mint_cookie", () -> new CookieItem(Properties.MINT), CreativeModeTabs.FOOD_AND_DRINKS);
-    public static final RegistryObject<Item> ADZUKI_COOKIE = createItem("adzuki_cookie", () -> new CookieItem(Properties.ADZUKI), CreativeModeTabs.FOOD_AND_DRINKS);
-    public static final RegistryObject<Item> BEETROOT_COOKIE = createCompatItem("beetroot_cookie", () -> new CookieItem(Properties.BEETROOT), Set.of(CookieliciousCompat.SEASONALS), CreativeModeTabs.FOOD_AND_DRINKS);
-    public static final RegistryObject<Item> PUMPKIN_COOKIE = createCompatItem("pumpkin_cookie", () -> new CookieItem(Properties.PUMPKIN), Set.of(CookieliciousCompat.SEASONALS), CreativeModeTabs.FOOD_AND_DRINKS);
 
+
+	public static final RegistryObject<Item> VANILLA_COOKIE = createCookie("vanilla_cookie", () -> new CookieItem(Properties.VANILLA));
+    public static final RegistryObject<Item> CHOCOLATE_COOKIE = createCookie("chocolate_cookie", () -> new CookieItem(Properties.CHOCOLATE));
+    public static final RegistryObject<Item> STRAWBERRY_COOKIE = createCookie("strawberry_cookie", () -> new HealingCookieItem(1F, Properties.STRAWBERRY));
+    public static final RegistryObject<Item> BANANA_COOKIE = createCookie("banana_cookie", () -> new CookieItem(Properties.BANANA));
+    public static final RegistryObject<Item> MINT_COOKIE = createCookie("mint_cookie", () -> new CookieItem(Properties.MINT));
+    public static final RegistryObject<Item> ADZUKI_COOKIE = createCookie("adzuki_cookie", () -> new CookieItem(Properties.ADZUKI));
+    public static final RegistryObject<Item> BEETROOT_COOKIE = createCompatCookie("beetroot_cookie", () -> new CookieItem(Properties.BEETROOT), Set.of(CookieliciousCompat.SEASONALS));
+    public static final RegistryObject<Item> PUMPKIN_COOKIE = createCompatCookie("pumpkin_cookie", () -> new CookieItem(Properties.PUMPKIN), Set.of(CookieliciousCompat.SEASONALS));
+
+
+
+
+	protected static RegistryObject<Item> createCookie(String name, Supplier<Item> itemSupplier) {
+		RegistryObject<Item> regObj = createItem(name, itemSupplier, CreativeModeTabs.FOOD_AND_DRINKS);
+		ALL_COOKIES.add(regObj);
+		return regObj;
+	}
+
+	protected static RegistryObject<Item> createCompatCookie(String name, Supplier<Item> itemSupplier, Set<String> modIds) {
+		RegistryObject<Item> regObj = createCompatItem(name, itemSupplier, modIds, CreativeModeTabs.FOOD_AND_DRINKS);
+		ALL_COOKIES.add(regObj);
+		return regObj;
+	}
 
 	@SafeVarargs
 	protected static RegistryObject<Item> createItem(String name, Supplier<Item> itemSupplier, @Nullable ResourceKey<CreativeModeTab>... creativeModeTabs) {
