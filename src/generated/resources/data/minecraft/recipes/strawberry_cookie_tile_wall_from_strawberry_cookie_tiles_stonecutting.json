@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "cookielicious:strawberry_cookie_tiles"
+  },
+  "result": "cookielicious:strawberry_cookie_tile_wall"
+}

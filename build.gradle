@@ -86,16 +86,15 @@ dependencies {
     implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_id}")
     runtimeOnly fg.deobf("curse.maven:jei-238222:${jei_id}")
 
-    //runtimeOnly fg.deobf("curse.maven:abnormals-delight-442719:4776026")
-    //runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:4679318")
-    //runtimeOnly fg.deobf("curse.maven:quark-243121:4587248")
-    //runtimeOnly fg.deobf("curse.maven:autoreglib-250363:4100299")
-    //runtimeOnly fg.deobf("curse.maven:environmental-388992:4415514")
-    //runtimeOnly fg.deobf("curse.maven:upgrade-aquatic-326895:4777515")
-    //runtimeOnly fg.deobf("curse.maven:autumnity-365045:4776187")
-    //runtimeOnly fg.deobf("curse.maven:atmospheric-362393:4415516")
-    //runtimeOnly fg.deobf("curse.maven:seasonals-416471:4806759")
-    //runtimeOnly fg.deobf("curse.maven:peculiars-418551:4806755")
+    runtimeOnly fg.deobf("curse.maven:abnormals-delight-442719:6057626")
+    runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:6154802")
+    runtimeOnly fg.deobf("curse.maven:environmental-388992:6060255")
+    runtimeOnly fg.deobf("curse.maven:upgrade-aquatic-326895:5615651")
+    runtimeOnly fg.deobf("curse.maven:autumnity-365045:6151402")
+    runtimeOnly fg.deobf("curse.maven:atmospheric-362393:6057624")
+    runtimeOnly fg.deobf("curse.maven:seasonals-416471:6058164")
+    runtimeOnly fg.deobf("curse.maven:peculiars-418551:6058169")
+    runtimeOnly fg.deobf("curse.maven:gallery-1173553:6133771")
 
 	//annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }

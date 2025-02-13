@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "farmersdelight"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "building",
+        "key": {
+          "#": {
+            "item": "cookielicious:sweet_berry_cookie_tiles"
+          }
+        },
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
+        "result": {
+          "count": 4,
+          "item": "cookielicious:sweet_berry_cookie_tile_stairs"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

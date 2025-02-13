@@ -26,6 +26,7 @@ public class CookieliciousBlocks {
 	public static final BlockSubRegistryHelper HELPER = Cookielicious.REGISTRY_HELPER.getBlockSubHelper();
 
 	public static final Map<RegistryObject<Block>, ToolType> EFFECTIVE_TOOL_MAP = new HashMap<>();
+	public static final List<RegistryObject<Block>> ALL_COOKIE_BLOCKS = new ArrayList<>();
 	public static final List<RegistryObject<Block>> ALL_TILES = new ArrayList<>();
 	public static final List<RegistryObject<Block>> ALL_TILE_STAIRS = new ArrayList<>();
 	public static final List<RegistryObject<Block>> ALL_TILE_SLABS = new ArrayList<>();
@@ -116,6 +117,7 @@ public class CookieliciousBlocks {
 		if (toolType != null) {
 			EFFECTIVE_TOOL_MAP.put(blockObject, toolType);
 		}
+		ALL_COOKIE_BLOCKS.add(blockObject);
 		ALL_TILES.add(blockObject);
 		return blockObject;
 	}
@@ -125,6 +127,7 @@ public class CookieliciousBlocks {
 		if (toolType != null) {
 			EFFECTIVE_TOOL_MAP.put(blockObject, toolType);
 		}
+		ALL_COOKIE_BLOCKS.add(blockObject);
 		ALL_TILE_STAIRS.add(blockObject);
 		return blockObject;
 	}
@@ -134,6 +137,7 @@ public class CookieliciousBlocks {
 		if (toolType != null) {
 			EFFECTIVE_TOOL_MAP.put(blockObject, toolType);
 		}
+		ALL_COOKIE_BLOCKS.add(blockObject);
 		ALL_TILE_SLABS.add(blockObject);
 		return blockObject;
 	}
@@ -143,6 +147,7 @@ public class CookieliciousBlocks {
 		if (toolType != null) {
 			EFFECTIVE_TOOL_MAP.put(blockObject, toolType);
 		}
+		ALL_COOKIE_BLOCKS.add(blockObject);
 		ALL_TILE_WALLS.add(blockObject);
 		return blockObject;
 	}

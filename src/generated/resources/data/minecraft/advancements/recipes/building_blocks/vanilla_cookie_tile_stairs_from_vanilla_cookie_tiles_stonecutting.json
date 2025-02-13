@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:vanilla_cookie_tile_stairs_from_vanilla_cookie_tiles_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vanilla_cookie_tiles": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cookielicious:vanilla_cookie_tiles"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_vanilla_cookie_tiles",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:vanilla_cookie_tile_stairs_from_vanilla_cookie_tiles_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

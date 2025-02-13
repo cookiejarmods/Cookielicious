@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "neapolitan:banana"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "pattern": [
+    "WRW"
+  ],
+  "result": {
+    "count": 8,
+    "item": "cookielicious:banana_cookie"
+  },
+  "show_notification": true
+}

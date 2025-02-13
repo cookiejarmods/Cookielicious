@@ -1,47 +1,35 @@
 {
-  "advancements": [
-    {
-      "advancement": {
-        "parent": "minecraft:recipes/root",
-        "criteria": {
-          "has_the_recipe": {
-            "conditions": {
-              "recipe": "cookielicious:vanilla_cookie_tile_slab"
-            },
-            "trigger": "minecraft:recipe_unlocked"
-          },
-          "has_vanilla_cookie_tiles": {
-            "conditions": {
-              "items": [
-                {
-                  "items": [
-                    "cookielicious:vanilla_cookie_tiles"
-                  ]
-                }
-              ]
-            },
-            "trigger": "minecraft:inventory_changed"
-          }
-        },
-        "requirements": [
-          [
-            "has_vanilla_cookie_tiles",
-            "has_the_recipe"
-          ]
-        ],
-        "rewards": {
-          "recipes": [
-            "cookielicious:vanilla_cookie_tile_slab"
-          ]
-        },
-        "sends_telemetry_event": false
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cookielicious:vanilla_cookie_tile_slab"
       },
-      "conditions": [
-        {
-          "type": "cookielicious:config",
-          "value": "vanilla_cookie_tiles"
-        }
-      ]
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vanilla_cookie_tiles": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cookielicious:vanilla_cookie_tiles"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
-  ]
+  },
+  "requirements": [
+    [
+      "has_vanilla_cookie_tiles",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cookielicious:vanilla_cookie_tile_slab"
+    ]
+  },
+  "sends_telemetry_event": false
 }

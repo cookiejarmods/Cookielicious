@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "cookielicious:chocolate_cookie_tiles"
+  },
+  "result": "cookielicious:chocolate_cookie_tile_stairs"
+}

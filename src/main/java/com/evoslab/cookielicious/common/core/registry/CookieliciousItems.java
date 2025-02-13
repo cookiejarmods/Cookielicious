@@ -1,9 +1,10 @@
 package com.evoslab.cookielicious.common.core.registry;
 
 import com.evoslab.cookielicious.common.core.Cookielicious;
+import com.evoslab.cookielicious.common.core.other.CookieliciousCompat;
 import com.evoslab.cookielicious.common.item.CookieItem;
 import com.evoslab.cookielicious.common.item.HealingCookieItem;
-import com.evoslab.cookielicious.common.core.other.CookieliciousCompat;
+import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
 import com.teamabnormals.neapolitan.core.Neapolitan;
 import net.minecraft.resources.ResourceKey;
@@ -14,9 +15,9 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraft.world.item.Items;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,6 +26,9 @@ import net.minecraftforge.registries.RegistryObject;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
+
+import static net.minecraft.world.item.CreativeModeTabs.*;
+import static net.minecraft.world.item.crafting.Ingredient.of;
 
 @Mod.EventBusSubscriber(modid = Cookielicious.MOD_ID, bus = Bus.MOD)
 public class CookieliciousItems {
@@ -50,13 +54,13 @@ public class CookieliciousItems {
 
 
 	protected static RegistryObject<Item> createCookie(String name, Supplier<Item> itemSupplier) {
-		RegistryObject<Item> regObj = createItem(name, itemSupplier, CreativeModeTabs.FOOD_AND_DRINKS);
+		RegistryObject<Item> regObj = createItem(name, itemSupplier, FOOD_AND_DRINKS);
 		ALL_COOKIES.add(regObj);
 		return regObj;
 	}
 
 	protected static RegistryObject<Item> createCompatCookie(String name, Supplier<Item> itemSupplier, Set<String> modIds) {
-		RegistryObject<Item> regObj = createCompatItem(name, itemSupplier, modIds, CreativeModeTabs.FOOD_AND_DRINKS);
+		RegistryObject<Item> regObj = createCompatItem(name, itemSupplier, modIds, FOOD_AND_DRINKS);
 		ALL_COOKIES.add(regObj);
 		return regObj;
 	}
@@ -102,11 +106,24 @@ public class CookieliciousItems {
 		}
 	}
 
-	public static void onCreativeTabPopulate(BuildCreativeModeTabContentsEvent event) {
-		if (TABS_FOR_ITEMS.containsKey(event.getTabKey())) {
-			List<RegistryObject<? extends Item>> items = TABS_FOR_ITEMS.get(event.getTabKey());
-			items.forEach((regObj) -> event.accept(regObj.get()));
-		}
+	public static void setupTabEditors() {
+		CreativeModeTabContentsPopulator.Entry entry = CreativeModeTabContentsPopulator.mod(Neapolitan.MOD_ID);
+
+		// Cookies
+		entry.tab(FOOD_AND_DRINKS);
+		ALL_COOKIES.forEach((regObj) -> {
+			if (TABS_FOR_ITEMS.get(FOOD_AND_DRINKS).contains(regObj)) {
+				entry.addItemsAfter(of(Items.COOKIE), regObj);
+			}
+		});
+
+		// Cookie blocks
+		entry.tab(BUILDING_BLOCKS);
+		CookieliciousBlocks.ALL_COOKIE_BLOCKS.forEach((regObj) -> {
+			if (TABS_FOR_ITEMS.get(BUILDING_BLOCKS).contains(regObj)) {
+				entry.addItems(regObj);
+			}
+		});
 	}
 
     public static class Properties {
