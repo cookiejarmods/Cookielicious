@@ -4,16 +4,12 @@ import com.evoslab.cookielicious.common.tag.CItemTags;
 import com.evoslab.cookielicious.common.triggers.CookieliciousTriggers;
 import com.evoslab.cookielicious.common.triggers.SimpleTypeTrigger;
 import com.evoslab.cookielicious.common.util.References;
-import com.google.common.collect.Lists;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.commands.AdvancementCommands;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -22,8 +18,6 @@ import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerListener;
-import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.inventory.FurnaceMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
@@ -41,7 +35,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityEventsListener {
+public class CEventsListener {
 
     private static final List<Item> AVAILABLE_COOKIES = new ArrayList<>();
 
@@ -191,6 +185,7 @@ public class EntityEventsListener {
         }
     }
 
+    /** Simple container listener to check for obtained cookies. */
     private static ContainerListener createCookieListener(ServerPlayer serverPlayer) {
         return new ContainerListener() {
             {

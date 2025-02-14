@@ -1,7 +1,7 @@
 package com.evoslab.cookielicious.common.core;
 
 import com.evoslab.cookielicious.common.core.registry.CookieliciousItems;
-import com.evoslab.cookielicious.common.event.EntityEventsListener;
+import com.evoslab.cookielicious.common.event.CEventsListener;
 import com.evoslab.cookielicious.common.triggers.CookieliciousTriggers;
 import com.evoslab.cookielicious.datagen.client.CBlockStateProvider;
 import com.evoslab.cookielicious.datagen.client.CItemModelProvider;
@@ -9,7 +9,6 @@ import com.evoslab.cookielicious.datagen.client.CLangProvider;
 import com.evoslab.cookielicious.datagen.server.*;
 import com.evoslab.cookielicious.common.core.other.CookieliciousCompat;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousLootConditions;
-import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -21,9 +20,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -42,7 +39,7 @@ public class Cookielicious {
     public Cookielicious() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new EntityEventsListener());
+        MinecraftForge.EVENT_BUS.register(new CEventsListener());
 
         REGISTRY_HELPER.register(modEventBus);
 
