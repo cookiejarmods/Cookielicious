@@ -15,8 +15,6 @@ Cookielicious is an addon for Neapolitan that adds more cookie themed items.
 '''
 itemIcon="cookielicious:cookie_tiles" #catalouge
 
-[modproperties.cookielicious]
-configuredBackground= "cookielicious:textures/blocks/cookie_tiles.png" #configured
 
 [[dependencies.cookielicious]]
     modId="forge"
