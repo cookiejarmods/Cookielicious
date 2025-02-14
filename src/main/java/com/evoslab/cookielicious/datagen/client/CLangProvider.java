@@ -3,9 +3,11 @@ package com.evoslab.cookielicious.datagen.client;
 import com.evoslab.cookielicious.common.core.Cookielicious;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousBlocks;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousItems;
+import com.evoslab.cookielicious.datagen.server.CAdvancementProvider;
 import com.google.common.collect.Lists;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.StringUtil;
+import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
@@ -38,6 +40,11 @@ public class CLangProvider extends LanguageProvider {
         CookieliciousBlocks.ALL_TILE_STAIRS.forEach(this::forBlock);
         CookieliciousBlocks.ALL_TILE_SLABS.forEach(this::forBlock);
         CookieliciousBlocks.ALL_TILE_WALLS.forEach(this::forBlock);
+
+        add(CAdvancementProvider.BAKE_EM_ALL, "Bake 'Em All!");
+        add(CAdvancementProvider.BAKE_EM_ALL_DESC, "Obtain one of every cookie");
+        add(CAdvancementProvider.YOU_MONSTER, "You Monster");
+        add(CAdvancementProvider.YOU_MONSTER_DESC, "Feed a cookie with chocolate to a Parrot and watch it perish horribly");
     }
 
     /**

@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 public class CItemTags {
 
     public static final TagKey<Item> COOKIES = forgeTag("cookies");
+    public static final TagKey<Item> CHOCOLATE_COOKIES = forgeTag("cookies/chocolate");
 
 
     private static TagKey<Item> forgeTag(String path) {

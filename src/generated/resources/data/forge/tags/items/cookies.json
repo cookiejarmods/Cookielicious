@@ -8,6 +8,26 @@
     "cookielicious:adzuki_cookie",
     "cookielicious:beetroot_cookie",
     "cookielicious:pumpkin_cookie",
-    "minecraft:cookie"
+    "minecraft:cookie",
+    {
+      "id": "abnormals_delight:cherry_cookie",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:mulberry_cookie",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:maple_cookie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:honey_cookie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sweet_berry_cookie",
+      "required": false
+    }
   ]
 }

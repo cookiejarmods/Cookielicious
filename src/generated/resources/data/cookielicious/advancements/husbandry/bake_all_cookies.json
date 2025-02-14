@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:husbandry/plant_seed",
+  "criteria": {
+    "has_all_cookies": {
+      "conditions": {
+        "type": "bake_em_all"
+      },
+      "trigger": "cookielicious:simple_type_trigger"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "cookielicious.advancements.bake_em_all.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "cookielicious:vanilla_cookie"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "cookielicious.advancements.bake_em_all.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_all_cookies"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

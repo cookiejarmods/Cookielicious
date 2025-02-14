@@ -1,15 +1,14 @@
 package com.evoslab.cookielicious.common.core;
 
 import com.evoslab.cookielicious.common.core.registry.CookieliciousItems;
+import com.evoslab.cookielicious.common.event.EntityEventsListener;
+import com.evoslab.cookielicious.common.triggers.CookieliciousTriggers;
 import com.evoslab.cookielicious.datagen.client.CBlockStateProvider;
 import com.evoslab.cookielicious.datagen.client.CItemModelProvider;
 import com.evoslab.cookielicious.datagen.client.CLangProvider;
-import com.evoslab.cookielicious.datagen.server.CItemTagsProvider;
-import com.evoslab.cookielicious.datagen.server.CLootTableProvider;
+import com.evoslab.cookielicious.datagen.server.*;
 import com.evoslab.cookielicious.common.core.other.CookieliciousCompat;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousLootConditions;
-import com.evoslab.cookielicious.datagen.server.CBlockTagsProvider;
-import com.evoslab.cookielicious.datagen.server.CRecipeProvider;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.core.HolderLookup;
@@ -43,8 +42,12 @@ public class Cookielicious {
     public Cookielicious() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new EntityEventsListener());
 
         REGISTRY_HELPER.register(modEventBus);
+
+        CookieliciousTriggers.init();
+
         CookieliciousLootConditions.LOOT_ITEM_CONDITION_TYPE.register(modEventBus);
 
         modEventBus.addListener(this::doCommonStuff);
@@ -80,7 +83,7 @@ public class Cookielicious {
         generator.addProvider(server, new CItemTagsProvider(generator, lookupProvider, blockTagProvider, fileHelper));
         generator.addProvider(server, new CRecipeProvider(generator));
         generator.addProvider(server, new CLootTableProvider(generator));
-
+        generator.addProvider(server, new CAdvancementProvider(generator, lookupProvider, fileHelper));
     }
 
     public static ResourceLocation modPrefix(String path) {
