@@ -52,6 +52,9 @@ public class CEventsListener {
 
             // ded
             if (interactionItem.is(CItemTags.CHOCOLATE_COOKIES)) {
+                if (!player.getAbilities().instabuild) {
+                    interactionItem.shrink(1);
+                }
                 parrot.addEffect(new MobEffectInstance(MobEffects.POISON, 900));
 
                 if (player.isCreative() || !parrot.isInvulnerable()) {
@@ -118,7 +121,7 @@ public class CEventsListener {
     /**
      * Looks through all crafting recipes that produce an item tagged as "forge:cookies",
      * and adds them to the {@link #AVAILABLE_COOKIES} list.<br>
-     * This list is used when tracking what cookies the player has crafted.
+     * This list is used when tracking what cookies the player has obtained.
      */
     private static void calculateAvailableCookies(MinecraftServer server) {
         List<CraftingRecipe> allCraftingRecipes = server.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING);
