@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="[47,)"
 license="All rights reserved"
-issueTrackerURL="http://github.com/Evoslab/Cookielicious/issues"
+issueTrackerURL="https://github.com/cookiejarmods/Cookielicious/issues"
 
 [[mods]]
 modId="cookielicious"
