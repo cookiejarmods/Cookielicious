@@ -48,7 +48,8 @@ public class CItemTagsProvider extends ItemTagsProvider {
                 .addOptional(registryId(CookieliciousCompat.FARMERS_DELIGHT, "honey_cookie"))
                 .addOptional(registryId(CookieliciousCompat.FARMERS_DELIGHT, "sweet_berry_cookie"))
                 .addOptional(registryId(CookieliciousCompat.MINERS_DELIGHT, "bat_cookie"))
-                .addOptional(registryId(CookieliciousCompat.FARMERS_RESPITE, "green_tea_cookie")
+                .addOptional(registryId(CookieliciousCompat.FARMERS_RESPITE, "green_tea_cookie"))
+                .addOptional(registryId(CookieliciousCompat.COLLECTORS_REAP, "lime_cookie")
         );
 
         // Chocolaty cookies of the parrot-murder variety.
