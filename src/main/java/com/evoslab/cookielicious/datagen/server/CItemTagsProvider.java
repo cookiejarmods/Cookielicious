@@ -10,6 +10,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -30,20 +31,27 @@ public class CItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        CookieliciousBlocks.ALL_TILE_SLABS.forEach(block -> tag(ItemTags.SLABS).add(block.get().asItem()));
-        CookieliciousBlocks.ALL_TILE_STAIRS.forEach(block -> tag(ItemTags.STAIRS).add(block.get().asItem()));
-        CookieliciousBlocks.ALL_TILE_WALLS.forEach(block -> tag(ItemTags.WALLS).add(block.get().asItem()));
+        CookieliciousBlocks.ALL_COOKIE_BLOCKS.forEach((cookieTileSet) -> {
+            tag(ItemTags.SLABS).add(cookieTileSet.slab().get().asItem());
+            tag(ItemTags.STAIRS).add(cookieTileSet.stairs().get().asItem());
+            tag(ItemTags.WALLS).add(cookieTileSet.wall().get().asItem());
+        });
 
+        // Our cookies!!! :O
         CookieliciousItems.ALL_COOKIES.forEach((regObj) -> tag(CItemTags.COOKIES).add(regObj.get()));
+        // The vanilla minecraft cookie and cookies from other mods.
         tag(CItemTags.COOKIES)
                 .add(Items.COOKIE)
                 .addOptional(registryId(CookieliciousCompat.ABNORMALS_DELIGHT, "cherry_cookie"))
                 .addOptional(registryId(CookieliciousCompat.ABNORMALS_DELIGHT, "mulberry_cookie"))
                 .addOptional(registryId(CookieliciousCompat.ABNORMALS_DELIGHT, "maple_cookie"))
                 .addOptional(registryId(CookieliciousCompat.FARMERS_DELIGHT, "honey_cookie"))
-                .addOptional(registryId(CookieliciousCompat.FARMERS_DELIGHT, "sweet_berry_cookie")
+                .addOptional(registryId(CookieliciousCompat.FARMERS_DELIGHT, "sweet_berry_cookie"))
+                .addOptional(registryId(CookieliciousCompat.MINERS_DELIGHT, "bat_cookie"))
+                .addOptional(registryId(CookieliciousCompat.FARMERS_RESPITE, "green_tea_cookie")
         );
 
+        // Chocolaty cookies of the parrot-murder variety.
         tag(CItemTags.CHOCOLATE_COOKIES).add(
                 Items.COOKIE,
                 CookieliciousItems.CHOCOLATE_COOKIE.get()

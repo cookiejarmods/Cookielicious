@@ -4,6 +4,7 @@ import com.evoslab.cookielicious.common.core.Cookielicious;
 import com.evoslab.cookielicious.common.core.other.CookieliciousCompat;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousBlocks;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousItems;
+import com.evoslab.cookielicious.common.core.registry.util.CookieTileSet;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
@@ -36,21 +38,29 @@ public class CRecipeProvider extends RecipeProvider {
         addCookieRecipe(CookieliciousItems.MINT_COOKIE, () -> getItem(CookieliciousCompat.NEAPOLITAN, "mint_leaves"), consumer);
         addCookieRecipe(CookieliciousItems.BANANA_COOKIE, () -> getItem(CookieliciousCompat.NEAPOLITAN, "banana"), consumer);
         addCookieRecipe(CookieliciousItems.ADZUKI_COOKIE, () -> getItem(CookieliciousCompat.NEAPOLITAN, "roasted_adzuki_beans"), consumer);
-        addModLoadedCookieRecipe(CookieliciousCompat.SEASONALS, CookieliciousItems.PUMPKIN_COOKIE, () -> getItem(CookieliciousCompat.SEASONALS, "pumpkin_puree"), consumer);
-        addModLoadedCookieRecipe(CookieliciousCompat.SEASONALS, CookieliciousItems.BEETROOT_COOKIE, () -> getItem(CookieliciousCompat.SEASONALS, "roasted_beetroot"), consumer);
 
-        addCookieTileRecipes(CookieliciousItems.VANILLA_COOKIE, CookieliciousBlocks.VANILLA_COOKIE_TILES, CookieliciousBlocks.VANILLA_COOKIE_TILE_STAIRS, CookieliciousBlocks.VANILLA_COOKIE_TILE_SLAB, CookieliciousBlocks.VANILLA_COOKIE_TILE_WALL, consumer);
-        addCookieTileRecipes(() -> Items.COOKIE, CookieliciousBlocks.COOKIE_TILES, CookieliciousBlocks.COOKIE_TILE_STAIRS, CookieliciousBlocks.COOKIE_TILE_SLAB, CookieliciousBlocks.COOKIE_TILE_WALL, consumer);
-        addCookieTileRecipes(CookieliciousItems.STRAWBERRY_COOKIE, CookieliciousBlocks.STRAWBERRY_COOKIE_TILES, CookieliciousBlocks.STRAWBERRY_COOKIE_TILE_STAIRS, CookieliciousBlocks.STRAWBERRY_COOKIE_TILE_SLAB, CookieliciousBlocks.STRAWBERRY_COOKIE_TILE_WALL, consumer);
-        addCookieTileRecipes(CookieliciousItems.CHOCOLATE_COOKIE, CookieliciousBlocks.CHOCOLATE_COOKIE_TILES, CookieliciousBlocks.CHOCOLATE_COOKIE_TILE_STAIRS, CookieliciousBlocks.CHOCOLATE_COOKIE_TILE_SLAB, CookieliciousBlocks.CHOCOLATE_COOKIE_TILE_WALL, consumer);
-        addModLoadedCookieTileRecipes(CookieliciousCompat.FARMERS_DELIGHT, () -> getItem(CookieliciousCompat.FARMERS_DELIGHT, "honey_cookie"), CookieliciousBlocks.HONEY_COOKIE_TILES, CookieliciousBlocks.HONEY_COOKIE_TILE_STAIRS, CookieliciousBlocks.HONEY_COOKIE_TILE_SLAB, CookieliciousBlocks.HONEY_COOKIE_TILE_WALL, consumer);
-        addModLoadedCookieTileRecipes(CookieliciousCompat.FARMERS_DELIGHT, () -> getItem(CookieliciousCompat.FARMERS_DELIGHT, "sweet_berry_cookie"), CookieliciousBlocks.SWEET_BERRY_COOKIE_TILES, CookieliciousBlocks.SWEET_BERRY_COOKIE_TILE_STAIRS, CookieliciousBlocks.SWEET_BERRY_COOKIE_TILE_SLAB, CookieliciousBlocks.SWEET_BERRY_COOKIE_TILE_WALL, consumer);
-        addCookieTileRecipes(CookieliciousItems.BANANA_COOKIE, CookieliciousBlocks.BANANA_COOKIE_TILES, CookieliciousBlocks.BANANA_COOKIE_TILE_STAIRS, CookieliciousBlocks.BANANA_COOKIE_TILE_SLAB, CookieliciousBlocks.BANANA_COOKIE_TILE_WALL, consumer);
-        addCookieTileRecipes(CookieliciousItems.MINT_COOKIE, CookieliciousBlocks.MINT_COOKIE_TILES, CookieliciousBlocks.MINT_COOKIE_TILE_STAIRS, CookieliciousBlocks.MINT_COOKIE_TILE_SLAB, CookieliciousBlocks.MINT_COOKIE_TILE_WALL, consumer);
-        addCookieTileRecipes(CookieliciousItems.ADZUKI_COOKIE, CookieliciousBlocks.ADZUKI_COOKIE_TILES, CookieliciousBlocks.ADZUKI_COOKIE_TILE_STAIRS, CookieliciousBlocks.ADZUKI_COOKIE_TILE_SLAB, CookieliciousBlocks.ADZUKI_COOKIE_TILE_WALL, consumer);
-        addModLoadedCookieTileRecipes(CookieliciousCompat.ABNORMALS_DELIGHT, () -> getItem(CookieliciousCompat.ABNORMALS_DELIGHT, "cherry_cookie"), CookieliciousBlocks.CHERRY_COOKIE_TILES, CookieliciousBlocks.CHERRY_COOKIE_TILE_STAIRS, CookieliciousBlocks.CHERRY_COOKIE_TILE_SLAB, CookieliciousBlocks.CHERRY_COOKIE_TILE_WALL, consumer);
-        addModLoadedCookieTileRecipes(CookieliciousCompat.ABNORMALS_DELIGHT, () -> getItem(CookieliciousCompat.ABNORMALS_DELIGHT, "mulberry_cookie"), CookieliciousBlocks.MULBERRY_COOKIE_TILES, CookieliciousBlocks.MULBERRY_COOKIE_TILE_STAIRS, CookieliciousBlocks.MULBERRY_COOKIE_TILE_SLAB, CookieliciousBlocks.MULBERRY_COOKIE_TILE_WALL, consumer);
-        addModLoadedCookieTileRecipes(CookieliciousCompat.ABNORMALS_DELIGHT, () -> getItem(CookieliciousCompat.ABNORMALS_DELIGHT, "maple_cookie"), CookieliciousBlocks.MAPLE_COOKIE_TILES, CookieliciousBlocks.MAPLE_COOKIE_TILE_STAIRS, CookieliciousBlocks.MAPLE_COOKIE_TILE_SLAB, CookieliciousBlocks.MAPLE_COOKIE_TILE_WALL, consumer);
+        addModLoadedCookieRecipe(CookieliciousCompat.SEASONALS, CookieliciousItems.BEETROOT_COOKIE, () -> getItem(CookieliciousCompat.SEASONALS, "roasted_beetroot"), consumer);
+        addModLoadedCookieRecipe(CookieliciousCompat.SEASONALS, CookieliciousItems.PUMPKIN_COOKIE, () -> getItem(CookieliciousCompat.SEASONALS, "pumpkin_puree"), consumer);
+
+
+        addCookieTileRecipes(() -> Items.COOKIE, CookieliciousBlocks.NORMAL_COOKIE, consumer);
+        addCookieTileRecipes(CookieliciousItems.VANILLA_COOKIE, CookieliciousBlocks.VANILLA_COOKIE, consumer);
+        addCookieTileRecipes(CookieliciousItems.STRAWBERRY_COOKIE, CookieliciousBlocks.STRAWBERRY_COOKIE, consumer);
+        addCookieTileRecipes(CookieliciousItems.CHOCOLATE_COOKIE, CookieliciousBlocks.CHOCOLATE_COOKIE, consumer);
+        addCookieTileRecipes(CookieliciousItems.BANANA_COOKIE, CookieliciousBlocks.BANANA_COOKIE, consumer);
+        addCookieTileRecipes(CookieliciousItems.MINT_COOKIE, CookieliciousBlocks.MINT_COOKIE, consumer);
+        addCookieTileRecipes(CookieliciousItems.ADZUKI_COOKIE, CookieliciousBlocks.ADZUKI_COOKIE, consumer);
+
+        addModLoadedCookieTileRecipes(CookieliciousCompat.SEASONALS, CookieliciousItems.BEETROOT_COOKIE, CookieliciousBlocks.BEETROOT_COOKIE, consumer);
+        addModLoadedCookieTileRecipes(CookieliciousCompat.SEASONALS, CookieliciousItems.PUMPKIN_COOKIE, CookieliciousBlocks.PUMPKIN_COOKIE, consumer);
+        addModLoadedCookieTileRecipes(CookieliciousCompat.FARMERS_DELIGHT, () -> getItem(CookieliciousCompat.FARMERS_DELIGHT, "honey_cookie"), CookieliciousBlocks.HONEY_COOKIE, consumer);
+        addModLoadedCookieTileRecipes(CookieliciousCompat.FARMERS_DELIGHT, () -> getItem(CookieliciousCompat.FARMERS_DELIGHT, "sweet_berry_cookie"), CookieliciousBlocks.SWEET_BERRY_COOKIE, consumer);
+        addModLoadedCookieTileRecipes(CookieliciousCompat.ABNORMALS_DELIGHT, () -> getItem(CookieliciousCompat.ABNORMALS_DELIGHT, "cherry_cookie"), CookieliciousBlocks.CHERRY_COOKIE, consumer);
+        addModLoadedCookieTileRecipes(CookieliciousCompat.ABNORMALS_DELIGHT, () -> getItem(CookieliciousCompat.ABNORMALS_DELIGHT, "mulberry_cookie"), CookieliciousBlocks.MULBERRY_COOKIE, consumer);
+        addModLoadedCookieTileRecipes(CookieliciousCompat.ABNORMALS_DELIGHT, () -> getItem(CookieliciousCompat.ABNORMALS_DELIGHT, "maple_cookie"), CookieliciousBlocks.MAPLE_COOKIE, consumer);
+        addModLoadedCookieTileRecipes(CookieliciousCompat.MINERS_DELIGHT, () -> getItem(CookieliciousCompat.MINERS_DELIGHT, "bat_cookie"), CookieliciousBlocks.BAT_COOKIE, consumer);
+        addModLoadedCookieTileRecipes(CookieliciousCompat.FARMERS_RESPITE, () -> getItem(CookieliciousCompat.FARMERS_RESPITE, "green_tea_cookie"), CookieliciousBlocks.GREEN_TEA_COOKIE, consumer);
+        addModLoadedCookieTileRecipes(CookieliciousCompat.FARMERS_RESPITE, () -> getItem(CookieliciousCompat.COLLECTORS_REAP, "lime_cookie"), CookieliciousBlocks.LIME_COOKIE, consumer);
 
     }
 
@@ -72,74 +82,71 @@ public class CRecipeProvider extends RecipeProvider {
                 .pattern("WRW").unlockedBy(getHasName(input.get()), has(input.get())), RecipeCategory.FOOD, consumer, null);
     }
 
-    private static void addCookieTileRecipes(Supplier<? extends ItemLike> cookie, Supplier<? extends ItemLike> tilesBlock,
-                                             Supplier<? extends ItemLike> stair, Supplier<? extends ItemLike> slab,
-                                             Supplier<? extends ItemLike> wall,
-                                             Consumer<FinishedRecipe> consumer) {
+    private static void addCookieTileRecipes(Supplier<? extends ItemLike> cookie, CookieTileSet cookieTileSet, Consumer<FinishedRecipe> consumer) {
+        final Block tiles = cookieTileSet.tiles().get();
 
         //Tiles
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, tilesBlock.get(), 4)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, tiles, 4)
                 .define('#', cookie.get()).pattern("##").pattern("##")
                 .unlockedBy(getHasName(cookie.get()), has(cookie.get()))
                 .save(consumer);
         //Stairs
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, stair.get(), 4)
-                .define('#', tilesBlock.get()).pattern("#  ").pattern("## ").pattern("###")
-                .unlockedBy(getHasName(tilesBlock.get()), has(tilesBlock.get()))
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, cookieTileSet.stairs().get(), 4)
+                .define('#', tiles).pattern("#  ").pattern("## ").pattern("###")
+                .unlockedBy(getHasName(tiles), has(tiles))
                 .save(consumer);
 
-        stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, stair.get(), tilesBlock.get());
+        stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, cookieTileSet.stairs().get(), tiles);
 
         //Slab
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, slab.get(), 6)
-                .define('#', tilesBlock.get()).pattern("###")
-                .unlockedBy(getHasName(tilesBlock.get()), has(tilesBlock.get()))
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, cookieTileSet.slab().get(), 6)
+                .define('#', tiles).pattern("###")
+                .unlockedBy(getHasName(tiles), has(tiles))
                 .save(consumer);
 
-        stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, slab.get(), tilesBlock.get(), 2);
+        stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, cookieTileSet.slab().get(), tiles, 2);
 
         //Wall
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, wall.get(), 6)
-                .define('#', tilesBlock.get()).pattern("###").pattern("###")
-                .unlockedBy(getHasName(tilesBlock.get()), has(tilesBlock.get()))
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, cookieTileSet.wall().get(), 6)
+                .define('#', tiles).pattern("###").pattern("###")
+                .unlockedBy(getHasName(tiles), has(tiles))
                 .save(consumer);
 
-        stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, wall.get(), tilesBlock.get());
+        stonecutterResultFromBase(consumer, RecipeCategory.BUILDING_BLOCKS, cookieTileSet.wall().get(), tiles);
     }
 
     private static void addModLoadedCookieTileRecipes(String modId, Supplier<? extends ItemLike> cookie,
-                                                      Supplier<? extends ItemLike> tilesBlock, Supplier<? extends ItemLike> stair,
-                                                      Supplier<? extends ItemLike> slab, Supplier<? extends ItemLike> wall,
-                                                      Consumer<FinishedRecipe> consumer) {
+                                                      CookieTileSet cookieTileSet, Consumer<FinishedRecipe> consumer) {
+        final Block tiles = cookieTileSet.tiles().get();
 
         //Tiles
-        conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, tilesBlock.get(), 4)
+        conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, tiles, 4)
                 .define('#', cookie.get()).pattern("##").pattern("##")
                 .unlockedBy(getHasName(cookie.get()), has(cookie.get())), RecipeCategory.BUILDING_BLOCKS, consumer, null);
         //Stairs
-        conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, stair.get(), 4)
-                .define('#', tilesBlock.get()).pattern("#  ").pattern("## ").pattern("###")
-                .unlockedBy(getHasName(tilesBlock.get()), has(tilesBlock.get())), RecipeCategory.BUILDING_BLOCKS, consumer, null);
+        conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, cookieTileSet.stairs().get(), 4)
+                .define('#', tiles).pattern("#  ").pattern("## ").pattern("###")
+                .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer, null);
 
-        conditionalModLoadedRecipe(modId, SingleItemRecipeBuilder.stonecutting(Ingredient.of(tilesBlock.get()), RecipeCategory.BUILDING_BLOCKS, stair.get())
-                .unlockedBy(getHasName(tilesBlock.get()), has(tilesBlock.get())), RecipeCategory.BUILDING_BLOCKS, consumer,
-                getConversionRecipeName(stair.get(), tilesBlock.get()) + "_stonecutting");
+        conditionalModLoadedRecipe(modId, SingleItemRecipeBuilder.stonecutting(Ingredient.of(tiles), RecipeCategory.BUILDING_BLOCKS, cookieTileSet.stairs().get())
+                .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer,
+                getConversionRecipeName(cookieTileSet.stairs().get(), tiles) + "_stonecutting");
         //Slab
-        conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, slab.get(), 6)
-                .define('#', tilesBlock.get()).pattern("###")
-                .unlockedBy(getHasName(tilesBlock.get()), has(tilesBlock.get())), RecipeCategory.BUILDING_BLOCKS, consumer, null);
+        conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, cookieTileSet.slab().get(), 6)
+                .define('#', tiles).pattern("###")
+                .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer, null);
 
-        conditionalModLoadedRecipe(modId, SingleItemRecipeBuilder.stonecutting(Ingredient.of(tilesBlock.get()), RecipeCategory.BUILDING_BLOCKS, slab.get(), 2)
-                .unlockedBy(getHasName(tilesBlock.get()), has(tilesBlock.get())), RecipeCategory.BUILDING_BLOCKS, consumer,
-                getConversionRecipeName(slab.get(), tilesBlock.get()) + "_stonecutting");
+        conditionalModLoadedRecipe(modId, SingleItemRecipeBuilder.stonecutting(Ingredient.of(tiles), RecipeCategory.BUILDING_BLOCKS, cookieTileSet.slab().get(), 2)
+                .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer,
+                getConversionRecipeName(cookieTileSet.slab().get(), tiles) + "_stonecutting");
         //Wall
-        conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, wall.get(), 6)
-                .define('#', tilesBlock.get()).pattern("###").pattern("###")
-                .unlockedBy(getHasName(tilesBlock.get()), has(tilesBlock.get())), RecipeCategory.BUILDING_BLOCKS, consumer, null);
+        conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, cookieTileSet.wall().get(), 6)
+                .define('#', tiles).pattern("###").pattern("###")
+                .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer, null);
 
-        conditionalModLoadedRecipe(modId, SingleItemRecipeBuilder.stonecutting(Ingredient.of(tilesBlock.get()), RecipeCategory.BUILDING_BLOCKS, wall.get())
-                .unlockedBy(getHasName(tilesBlock.get()), has(tilesBlock.get())), RecipeCategory.BUILDING_BLOCKS, consumer,
-                getConversionRecipeName(wall.get(), tilesBlock.get()) + "_stonecutting");
+        conditionalModLoadedRecipe(modId, SingleItemRecipeBuilder.stonecutting(Ingredient.of(tiles), RecipeCategory.BUILDING_BLOCKS, cookieTileSet.wall().get())
+                .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer,
+                getConversionRecipeName(cookieTileSet.wall().get(), tiles) + "_stonecutting");
     }
 
     public static void conditionalModLoadedRecipe(String modId, RecipeBuilder recipe, RecipeCategory category, Consumer<FinishedRecipe> consumer, @Nullable String customPath) {

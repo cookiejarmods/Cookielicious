@@ -88,11 +88,14 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:abnormals-delight-442719:6057626")
     runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:6154802")
+    runtimeOnly fg.deobf("curse.maven:miners-delight-689630:5038950")
+    runtimeOnly fg.deobf("curse.maven:farmers-respite-551453:5543547")
     runtimeOnly fg.deobf("curse.maven:environmental-388992:6060255")
     runtimeOnly fg.deobf("curse.maven:upgrade-aquatic-326895:5615651")
     runtimeOnly fg.deobf("curse.maven:autumnity-365045:6151402")
     runtimeOnly fg.deobf("curse.maven:atmospheric-362393:6057624")
     runtimeOnly fg.deobf("curse.maven:seasonals-416471:6058164")
+    runtimeOnly fg.deobf("curse.maven:collectors-reap-807101:6249047")
     runtimeOnly fg.deobf("curse.maven:peculiars-418551:6058169")
     runtimeOnly fg.deobf("curse.maven:gallery-1173553:6133771")
 

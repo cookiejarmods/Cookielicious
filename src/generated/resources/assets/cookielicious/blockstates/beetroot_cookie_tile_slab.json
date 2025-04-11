@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "cookielicious:block/beetroot_cookie_tile_slab"
+    },
+    "type=double": {
+      "model": "cookielicious:block/beetroot_cookie_tiles"
+    },
+    "type=top": {
+      "model": "cookielicious:block/beetroot_cookie_tile_slab_top"
+    }
+  }
+}

@@ -36,6 +36,7 @@ public class CookieliciousItems {
 	public static final ItemSubRegistryHelper HELPER = Cookielicious.REGISTRY_HELPER.getItemSubHelper();
 
 	public static final Map<ResourceKey<CreativeModeTab>, List<RegistryObject<? extends Item>>> TABS_FOR_ITEMS = new HashMap<>();
+	/** All cookies added by Cookielicious */
 	public static final List<RegistryObject<Item>> ALL_COOKIES = new ArrayList<>();
 
 
@@ -119,9 +120,18 @@ public class CookieliciousItems {
 
 		// Cookie blocks
 		entry.tab(BUILDING_BLOCKS);
-		CookieliciousBlocks.ALL_COOKIE_BLOCKS.forEach((regObj) -> {
-			if (TABS_FOR_ITEMS.get(BUILDING_BLOCKS).contains(regObj)) {
-				entry.addItems(regObj);
+		CookieliciousBlocks.ALL_COOKIE_BLOCKS.forEach((cookieTileSet) -> {
+			if (TABS_FOR_ITEMS.get(BUILDING_BLOCKS).contains(cookieTileSet.tiles())) {
+				entry.addItems(cookieTileSet.tiles());
+			}
+			if (TABS_FOR_ITEMS.get(BUILDING_BLOCKS).contains(cookieTileSet.stairs())) {
+				entry.addItems(cookieTileSet.stairs());
+			}
+			if (TABS_FOR_ITEMS.get(BUILDING_BLOCKS).contains(cookieTileSet.slab())) {
+				entry.addItems(cookieTileSet.slab());
+			}
+			if (TABS_FOR_ITEMS.get(BUILDING_BLOCKS).contains(cookieTileSet.wall())) {
+				entry.addItems(cookieTileSet.wall());
 			}
 		});
 	}

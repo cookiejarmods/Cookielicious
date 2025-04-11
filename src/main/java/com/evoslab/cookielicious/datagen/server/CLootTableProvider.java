@@ -37,10 +37,12 @@ public class CLootTableProvider extends LootTableProvider {
 
         @Override
         protected void generate() {
-            CookieliciousBlocks.ALL_TILES.forEach(block -> dropSelf(block.get()));
-            CookieliciousBlocks.ALL_TILE_STAIRS.forEach(block -> dropSelf(block.get()));
-            CookieliciousBlocks.ALL_TILE_SLABS.forEach(block -> add(block.get(), this::createSlabItemTable));
-            CookieliciousBlocks.ALL_TILE_WALLS.forEach(block -> dropSelf(block.get()));
+            CookieliciousBlocks.ALL_COOKIE_BLOCKS.forEach((cookieTileSet) -> {
+                dropSelf(cookieTileSet.tiles().get());
+                dropSelf(cookieTileSet.stairs().get());
+                add(cookieTileSet.slab().get(), this::createSlabItemTable);
+                dropSelf(cookieTileSet.wall().get());
+            });
         }
 
         @Override

@@ -4,12 +4,12 @@
       "advancement": {
         "parent": "minecraft:recipes/root",
         "criteria": {
-          "has_honey_cookie": {
+          "has_pumpkin_cookie": {
             "conditions": {
               "items": [
                 {
                   "items": [
-                    "farmersdelight:honey_cookie"
+                    "cookielicious:pumpkin_cookie"
                   ]
                 }
               ]
@@ -25,7 +25,7 @@
         },
         "requirements": [
           [
-            "has_honey_cookie",
+            "has_pumpkin_cookie",
             "has_the_recipe"
           ]
         ],
@@ -39,7 +39,7 @@
       "conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "farmersdelight"
+          "modid": "seasonals"
         }
       ]
     }

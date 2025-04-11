@@ -9,9 +9,14 @@
     "cookielicious:banana_cookie_tile_wall",
     "cookielicious:mint_cookie_tile_wall",
     "cookielicious:adzuki_cookie_tile_wall",
+    "cookielicious:beetroot_cookie_tile_wall",
+    "cookielicious:pumpkin_cookie_tile_wall",
     "cookielicious:cherry_cookie_tile_wall",
     "cookielicious:mulberry_cookie_tile_wall",
     "cookielicious:maple_cookie_tile_wall",
-    "cookielicious:gooseberry_jam_cookie_tile_wall"
+    "cookielicious:gooseberry_jam_cookie_tile_wall",
+    "cookielicious:bat_cookie_tile_wall",
+    "cookielicious:green_tea_cookie_tile_wall",
+    "cookielicious:lime_cookie_tile_wall"
   ]
 }

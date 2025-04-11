@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_side",
+  "textures": {
+    "wall": "cookielicious:block/lime_cookie_tiles"
+  }
+}

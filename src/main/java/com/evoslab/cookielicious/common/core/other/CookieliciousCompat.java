@@ -19,6 +19,9 @@ public class CookieliciousCompat {
     public static final String QUARK = "quark";
     public static final String BAYOU_BLUES = "bayou_blues";
     public static final String SEASONALS = "seasonals";
+    public static final String MINERS_DELIGHT = "miners_delight";
+    public static final String FARMERS_RESPITE = "farmersrespite";
+    public static final String COLLECTORS_REAP = "collectorsreap";
 
     public static void registerCompat() {
         registerCompostables();

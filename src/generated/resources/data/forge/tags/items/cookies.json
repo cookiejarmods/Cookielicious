@@ -28,6 +28,14 @@
     {
       "id": "farmersdelight:sweet_berry_cookie",
       "required": false
+    },
+    {
+      "id": "miners_delight:bat_cookie",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:green_tea_cookie",
+      "required": false
     }
   ]
 }

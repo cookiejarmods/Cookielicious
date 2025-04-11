@@ -27,13 +27,16 @@ public class CBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         effectiveToolTags();
-        CookieliciousBlocks.ALL_TILE_SLABS.forEach(block -> tag(BlockTags.SLABS).add(block.get()));
-        CookieliciousBlocks.ALL_TILE_STAIRS.forEach(block -> tag(BlockTags.STAIRS).add(block.get()));
-        CookieliciousBlocks.ALL_TILE_WALLS.forEach(block -> tag(BlockTags.WALLS).add(block.get()));
+
+        CookieliciousBlocks.ALL_COOKIE_BLOCKS.forEach((cookieTileSet) -> {
+            tag(BlockTags.SLABS).add(cookieTileSet.slab().get());
+            tag(BlockTags.STAIRS).add(cookieTileSet.stairs().get());
+            tag(BlockTags.WALLS).add(cookieTileSet.wall().get());
+        });
     }
 
     private void effectiveToolTags() {
-        for (RegistryObject<Block> block : CookieliciousBlocks.EFFECTIVE_TOOL_MAP.keySet()) {
+        for (RegistryObject<? extends Block> block : CookieliciousBlocks.EFFECTIVE_TOOL_MAP.keySet()) {
             ToolType toolType = CookieliciousBlocks.EFFECTIVE_TOOL_MAP.get(block);
 
             switch (toolType) {

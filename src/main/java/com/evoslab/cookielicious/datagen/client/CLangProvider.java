@@ -36,10 +36,12 @@ public class CLangProvider extends LanguageProvider {
         forItem(CookieliciousItems.PUMPKIN_COOKIE);
         forItem(CookieliciousItems.BEETROOT_COOKIE);
 
-        CookieliciousBlocks.ALL_TILES.forEach(this::forBlock);
-        CookieliciousBlocks.ALL_TILE_STAIRS.forEach(this::forBlock);
-        CookieliciousBlocks.ALL_TILE_SLABS.forEach(this::forBlock);
-        CookieliciousBlocks.ALL_TILE_WALLS.forEach(this::forBlock);
+        CookieliciousBlocks.ALL_COOKIE_BLOCKS.forEach((cookieTileSet) -> {
+            forBlock(cookieTileSet.tiles());
+            forBlock(cookieTileSet.stairs());
+            forBlock(cookieTileSet.slab());
+            forBlock(cookieTileSet.wall());
+        });
 
         add(CAdvancementProvider.BAKE_EM_ALL, "Bake 'Em All!");
         add(CAdvancementProvider.BAKE_EM_ALL_DESC, "Obtain one of every cookie");

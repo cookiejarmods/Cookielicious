@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "cookielicious:block/pumpkin_cookie_tiles"
+  }
+}
