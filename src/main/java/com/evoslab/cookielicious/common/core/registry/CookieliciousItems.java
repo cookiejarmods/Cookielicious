@@ -44,7 +44,7 @@ public class CookieliciousItems {
 
 	public static final RegistryObject<Item> VANILLA_COOKIE = createCookie("vanilla_cookie", () -> new CookieItem(Properties.VANILLA));
     public static final RegistryObject<Item> CHOCOLATE_COOKIE = createCookie("chocolate_cookie", () -> new CookieItem(Properties.CHOCOLATE));
-    public static final RegistryObject<Item> STRAWBERRY_COOKIE = createCookie("strawberry_cookie", () -> new HealingCookieItem(1F, Properties.STRAWBERRY));
+    public static final RegistryObject<Item> STRAWBERRY_COOKIE = createCookie("strawberry_cookie", () -> new HealingCookieItem(1.0F, Properties.STRAWBERRY));
     public static final RegistryObject<Item> BANANA_COOKIE = createCookie("banana_cookie", () -> new CookieItem(Properties.BANANA));
     public static final RegistryObject<Item> MINT_COOKIE = createCookie("mint_cookie", () -> new CookieItem(Properties.MINT));
     public static final RegistryObject<Item> ADZUKI_COOKIE = createCookie("adzuki_cookie", () -> new CookieItem(Properties.ADZUKI));
@@ -147,13 +147,18 @@ public class CookieliciousItems {
 		public static final Item.Properties PUMPKIN = getCookieProps(Effects.STUFFED);
 
     	public static Item.Properties getCookieProps(MobEffect effect) {
-    		return getCookieProps().food(new FoodProperties.Builder().effect(() -> new MobEffectInstance(effect, 120, 0), 1F).build());
+			return new Item.Properties().food(new FoodProperties.Builder()
+					.nutrition(2)
+					.saturationMod(0.1F)
+					.fast()
+					.effect(() -> new MobEffectInstance(effect, 120, 0), 1F)
+					.build());
     	}
     	
     	public static Item.Properties getCookieProps() {
     		return new Item.Properties().food(new FoodProperties.Builder()
 					.nutrition(2)
-					.saturationMod(1F)
+					.saturationMod(0.1F)
     				.fast()
     				.build());
     	}

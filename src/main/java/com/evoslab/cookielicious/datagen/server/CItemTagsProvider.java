@@ -39,6 +39,7 @@ public class CItemTagsProvider extends ItemTagsProvider {
 
         // Our cookies!!! :O
         CookieliciousItems.ALL_COOKIES.forEach((regObj) -> tag(CItemTags.COOKIES).add(regObj.get()));
+
         // The vanilla minecraft cookie and cookies from other mods.
         tag(CItemTags.COOKIES)
                 .add(Items.COOKIE)
