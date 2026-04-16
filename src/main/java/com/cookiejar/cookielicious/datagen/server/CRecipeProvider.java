@@ -60,7 +60,7 @@ public class CRecipeProvider extends RecipeProvider {
         addModLoadedCookieTileRecipes(CookieliciousCompat.ABNORMALS_DELIGHT, () -> getItem(CookieliciousCompat.ABNORMALS_DELIGHT, "mulberry_cookie"), CookieliciousBlocks.MULBERRY_COOKIE, recipeOutput);
         addModLoadedCookieTileRecipes(CookieliciousCompat.ABNORMALS_DELIGHT, () -> getItem(CookieliciousCompat.ABNORMALS_DELIGHT, "maple_cookie"), CookieliciousBlocks.MAPLE_COOKIE, recipeOutput);
 
-        //addModLoadedCookieTileRecipes(CookieliciousCompat.MINERS_DELIGHT, () -> getItem(CookieliciousCompat.MINERS_DELIGHT, "bat_cookie"), CookieliciousBlocks.BAT_COOKIE, recipeOutput);
+        addModLoadedCookieTileRecipes(CookieliciousCompat.MINERS_DELIGHT, () -> getItem(CookieliciousCompat.MINERS_DELIGHT, "bat_cookie"), CookieliciousBlocks.BAT_COOKIE, recipeOutput);
 
         //addModLoadedCookieTileRecipes(CookieliciousCompat.FARMERS_RESPITE, () -> getItem(CookieliciousCompat.FARMERS_RESPITE, "green_tea_cookie"), CookieliciousBlocks.GREEN_TEA_COOKIE, recipeOutput);
         //addModLoadedCookieTileRecipes(CookieliciousCompat.FARMERS_RESPITE, () -> getItem(CookieliciousCompat.COLLECTORS_REAP, "lime_cookie"), CookieliciousBlocks.LIME_COOKIE, recipeOutput);

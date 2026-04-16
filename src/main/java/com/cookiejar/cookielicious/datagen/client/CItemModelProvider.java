@@ -30,6 +30,4 @@ public class CItemModelProvider extends ItemModelProvider {
     private void basicItem(Supplier<? extends Item> item) {
         basicItem(item.get());
     }
-
-
 }
