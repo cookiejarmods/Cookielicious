@@ -3,8 +3,8 @@ package com.cookiejar.cookielicious.common.core.other;
 import com.cookiejar.cookielicious.common.item.CookieItem;
 import com.cookiejar.cookielicious.common.item.HealingCookieItem;
 import com.teamabnormals.blueprint.core.util.DataUtil;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class CookieliciousCompat {
 
@@ -27,8 +27,9 @@ public class CookieliciousCompat {
     }
 
     public static void registerCompostables() {
-        for (Item item : ForgeRegistries.ITEMS.getValues()) {
+        for (Item item : BuiltInRegistries.ITEM.stream().toList()) {
             if (item instanceof CookieItem || item instanceof HealingCookieItem) {
+                // TODO - Add via json instead
                 DataUtil.registerCompostable(item, 0.85F);
             }
         }

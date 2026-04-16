@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "cookielicious:block/maple_cookie_tiles",
-    "side": "cookielicious:block/maple_cookie_tiles",
-    "top": "cookielicious:block/maple_cookie_tiles"
-  }
-}

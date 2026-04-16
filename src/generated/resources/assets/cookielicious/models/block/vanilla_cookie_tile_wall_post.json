@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/template_wall_post",
-  "textures": {
-    "wall": "cookielicious:block/vanilla_cookie_tiles"
-  }
-}

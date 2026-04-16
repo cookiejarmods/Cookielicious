@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "cookielicious:block/sweet_berry_cookie_tiles",
-    "side": "cookielicious:block/sweet_berry_cookie_tiles",
-    "top": "cookielicious:block/sweet_berry_cookie_tiles"
-  }
-}

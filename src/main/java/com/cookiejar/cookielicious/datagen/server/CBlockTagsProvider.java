@@ -8,9 +8,9 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -35,7 +35,7 @@ public class CBlockTagsProvider extends BlockTagsProvider {
     }
 
     private void effectiveToolTags() {
-        for (RegistryObject<? extends Block> block : CookieliciousBlocks.EFFECTIVE_TOOL_MAP.keySet()) {
+        for (DeferredBlock<? extends Block> block : CookieliciousBlocks.EFFECTIVE_TOOL_MAP.keySet()) {
             ToolType toolType = CookieliciousBlocks.EFFECTIVE_TOOL_MAP.get(block);
 
             switch (toolType) {

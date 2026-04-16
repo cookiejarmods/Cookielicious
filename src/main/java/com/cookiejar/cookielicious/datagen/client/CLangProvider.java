@@ -5,11 +5,11 @@ import com.cookiejar.cookielicious.common.core.registry.CookieliciousBlocks;
 import com.cookiejar.cookielicious.common.core.registry.CookieliciousItems;
 import com.cookiejar.cookielicious.datagen.server.CAdvancementProvider;
 import com.google.common.collect.Lists;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 
 import java.util.List;
 import java.util.Objects;
@@ -49,11 +49,11 @@ public class CLangProvider extends LanguageProvider {
      * The code below was taken from Sully's Mod, with permission
      */
     public void forItem(Supplier<? extends Item> item) {
-        addItem(item, createTranslation(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item.get())).getPath()));
+        addItem(item, createTranslation(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item.get())).getPath()));
     }
 
     public void forBlock(Supplier<? extends Block> block) {
-        addBlock(block, createTranslation(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block.get())).getPath()));
+        addBlock(block, createTranslation(Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(block.get())).getPath()));
     }
 
     public String createTranslation(String path) {

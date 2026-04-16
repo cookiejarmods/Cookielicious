@@ -1,75 +1,24 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '[6.0,6.2)', changing: true
-        classpath group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT"
-    }
-}
 plugins {
-    id 'eclipse'
+    id 'java-library'
     id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.141'
     id 'idea'
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: "org.spongepowered.mixin"
 
-version = "${mc_version}-${mod_version}"
-group = 'com.evoslab.cookielicious'
-archivesBaseName = 'cookielicious'
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft {
-    mappings channel: 'official', version: "${mc_version}"
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    runs {
-        configureEach {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                cookielicious {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        client {
-            property "mixin.debug.export", "true"
-            property 'mixin.env.disableRefMap', 'true'
-
-            //arg "-mixin.config=cookielicious.mixins.json"
-        }
-
-        server {
-            property "mixin.debug.export", "true"
-            property 'mixin.env.disableRefMap', 'true'
-
-            //arg "-mixin.config=cookielicious.mixins.json"
-        }
-
-        gameTestServer {
-            property 'forge.enabledGameTestNamespaces', 'cookielicious'
-        }
-
-        data {
-            args '--mod', 'cookielicious', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-        }
-    }
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+version = mod_version
+group = mod_group_id
+
+sourceSets.main.resources {
+    srcDir('src/generated/resources')
+    exclude("**/*.bbmodel")
+    exclude("src/generated/**/.cache")
+}
 
 repositories {
-    // Repos for mods to include during development
     maven {
         name 'CurseMaven'
         url 'https://www.cursemaven.com'
@@ -79,61 +28,126 @@ repositories {
     }
 }
 
-dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-
-    implementation fg.deobf("curse.maven:blueprint-382216:${blueprint_id}")
-    implementation fg.deobf("curse.maven:neapolitan-382016:${neapolitan_id}")
-    runtimeOnly fg.deobf("curse.maven:jei-238222:${jei_id}")
-
-    runtimeOnly fg.deobf("curse.maven:abnormals-delight-442719:6057626")
-    runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:6154802")
-    runtimeOnly fg.deobf("curse.maven:miners-delight-689630:5038950")
-    runtimeOnly fg.deobf("curse.maven:farmers-respite-551453:5543547")
-    runtimeOnly fg.deobf("curse.maven:environmental-388992:6060255")
-    runtimeOnly fg.deobf("curse.maven:upgrade-aquatic-326895:5615651")
-    runtimeOnly fg.deobf("curse.maven:autumnity-365045:6151402")
-    runtimeOnly fg.deobf("curse.maven:atmospheric-362393:6057624")
-    runtimeOnly fg.deobf("curse.maven:seasonals-416471:6058164")
-    runtimeOnly fg.deobf("curse.maven:collectors-reap-807101:6249047")
-    runtimeOnly fg.deobf("curse.maven:peculiars-418551:6058169")
-    runtimeOnly fg.deobf("curse.maven:gallery-1173553:6133771")
-
-	//annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+base {
+    archivesName = mod_id
 }
 
-jar {
-    manifest {
-        attributes([
-            "Specification-Title": "Cookielicious",
-            "Specification-Vendor": "Evo's Lab",
-            "Specification-Version": "1",
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor": "Evo's Lab",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
     }
 }
 
-jar.finalizedBy('reobfJar')
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+dependencies {
+    implementation("curse.maven:blueprint-382216:${blueprint_id}")
+    implementation("curse.maven:neapolitan-382016:${neapolitan_id}")
+    localRuntime("curse.maven:jei-238222:${jei_id}")
+
+    localRuntime("curse.maven:abnormals-delight-442719:7123873")
+    localRuntime("curse.maven:farmers-delight-398521:7801529")
+    localRuntime("curse.maven:miners-delight-689630:6860679")
+    // Miner's Delight requires Lodestone
+    localRuntime("curse.maven:lodestone-616457:7264731")
+    localRuntime("curse.maven:environmental-388992:7122147")
+    localRuntime("curse.maven:upgrade-aquatic-326895:7115763")
+    localRuntime("curse.maven:autumnity-365045:7118591")
+    localRuntime("curse.maven:atmospheric-362393:7119609")
+    localRuntime("curse.maven:gallery-1173553:6449910")
+    localRuntime("curse.maven:woodworks-543610:7118286")
+
+    // The below mods are currently not available for Neo 1.21.1
+    //
+    //localRuntime("curse.maven:farmers-respite-551453:5543547")
+    //localRuntime("curse.maven:seasonals-416471:6058164")
+    //localRuntime("curse.maven:collectors-reap-807101:6249047")
+    //localRuntime("curse.maven:peculiars-418551:6058169")
+}
+
+var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from "src/main/templates"
+    into "build/generated/sources/modMetadata"
+}
+
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifact jar
+        register('mavenJava', MavenPublication) {
+            from components.java
         }
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url "file://${project.projectDir}/repo"
         }
     }
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
 idea {
     module {
-        downloadJavadoc = true
         downloadSources = true
+        downloadJavadoc = true
     }
 }

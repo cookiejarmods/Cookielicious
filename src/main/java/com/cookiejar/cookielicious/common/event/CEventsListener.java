@@ -1,9 +1,10 @@
 package com.cookiejar.cookielicious.common.event;
 
+import com.cookiejar.cookielicious.common.core.registry.CookieliciousTriggers;
 import com.cookiejar.cookielicious.common.tag.CItemTags;
-import com.cookiejar.cookielicious.common.triggers.CookieliciousTriggers;
 import com.cookiejar.cookielicious.common.triggers.SimpleTypeTrigger;
 import com.cookiejar.cookielicious.common.util.References;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -20,17 +21,15 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.event.entity.player.AdvancementEvent;
-import net.minecraftforge.event.entity.player.PlayerContainerEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
-import net.minecraftforge.event.server.ServerStoppedEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.player.*;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +60,7 @@ public class CEventsListener {
                     parrot.hurt(parrot.damageSources().playerAttack(player), Float.MAX_VALUE);
                 }
                 if (player instanceof ServerPlayer serverPlayer) {
-                    CookieliciousTriggers.SIMPLE_TYPE.trigger(serverPlayer, SimpleTypeTrigger.Type.POISON_PARROT);
+                    CookieliciousTriggers.SIMPLE_TYPE.get().trigger(serverPlayer, SimpleTypeTrigger.Type.POISON_PARROT);
                 }
                 event.setCancellationResult(InteractionResult.sidedSuccess(player.level().isClientSide));
                 event.setCanceled(true);
@@ -84,11 +83,11 @@ public class CEventsListener {
         }
     }
 
-    @SubscribeEvent
-    public void onPickUpItem(PlayerEvent.ItemPickupEvent event) {
-        if (AVAILABLE_COOKIES.contains(event.getStack().getItem())) {
-            if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-                checkCookiesObtained(serverPlayer, event.getStack());
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void onPickedUpItem(ItemEntityPickupEvent.Post event) {
+        if (AVAILABLE_COOKIES.contains(event.getCurrentStack().getItem())) {
+            if (event.getPlayer() instanceof ServerPlayer serverPlayer) {
+                checkCookiesObtained(serverPlayer, event.getCurrentStack());
             }
         }
     }
@@ -96,7 +95,7 @@ public class CEventsListener {
     @SubscribeEvent
     public void onAdvancementProgress(AdvancementEvent.AdvancementProgressEvent event) {
         if (event.getProgressType() == AdvancementEvent.AdvancementProgressEvent.ProgressType.REVOKE
-                && event.getAdvancement().getId().equals(References.BAKE_EM_ALL_ADV)) {
+                && event.getAdvancement().id().equals(References.BAKE_EM_ALL_ADV)) {
             if (event.getEntity() instanceof ServerPlayer serverPlayer) {
                 // Clear progress saved to persistent player data
                 CompoundTag persistentData = serverPlayer.getPersistentData();
@@ -124,9 +123,10 @@ public class CEventsListener {
      * This list is used when tracking what cookies the player has obtained.
      */
     private static void calculateAvailableCookies(MinecraftServer server) {
-        List<CraftingRecipe> allCraftingRecipes = server.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING);
+        List<RecipeHolder<CraftingRecipe>> allCraftingRecipes = server.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING);
 
-        for (CraftingRecipe recipe : allCraftingRecipes) {
+        for (RecipeHolder<CraftingRecipe> holder : allCraftingRecipes) {
+            CraftingRecipe recipe = holder.value();
             ItemStack result = recipe.getResultItem(server.registryAccess());
 
             if (result.is(CItemTags.COOKIES)) {
@@ -151,7 +151,7 @@ public class CEventsListener {
 
         ListTag listTag = modData.getList(COOKIES_OBTAINED_KEY, Tag.TAG_STRING);
 
-        String itemId = ForgeRegistries.ITEMS.getKey(craftedItem.getItem()).toString();
+        String itemId = BuiltInRegistries.ITEM.getKey(craftedItem.getItem()).toString();
         boolean exists = false;
 
         for (int i = 0; i < listTag.size(); i++) {
@@ -175,16 +175,16 @@ public class CEventsListener {
             ResourceLocation id = ResourceLocation.tryParse(listTag.getString(i));
             if (id == null) continue;
 
-            Item item = ForgeRegistries.ITEMS.getValue(id);
+            Item item = BuiltInRegistries.ITEM.get(id);
 
-            if (item != null && allCookiesCopy.contains(item)) {
-                allCookiesCopy.remove(item);
-            }
+            if (item == Items.AIR) continue;
+
+            allCookiesCopy.remove(item);
         }
 
         // All cookies have been crafted, grant advancement
         if (allCookiesCopy.isEmpty()) {
-            CookieliciousTriggers.SIMPLE_TYPE.trigger(serverPlayer, SimpleTypeTrigger.Type.BAKE_EM_ALL);
+            CookieliciousTriggers.SIMPLE_TYPE.get().trigger(serverPlayer, SimpleTypeTrigger.Type.BAKE_EM_ALL);
         }
     }
 

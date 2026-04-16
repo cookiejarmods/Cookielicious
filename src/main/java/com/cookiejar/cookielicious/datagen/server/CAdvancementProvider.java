@@ -5,20 +5,21 @@ import com.cookiejar.cookielicious.common.core.registry.CookieliciousItems;
 import com.cookiejar.cookielicious.common.triggers.SimpleTypeTrigger;
 import com.cookiejar.cookielicious.common.util.References;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.FrameType;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementType;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.ForgeAdvancementProvider;
+import net.neoforged.neoforge.common.data.AdvancementProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-public class CAdvancementProvider extends ForgeAdvancementProvider {
+public class CAdvancementProvider extends AdvancementProvider {
 
     public static final String BAKE_EM_ALL = title("bake_em_all");
     public static final String BAKE_EM_ALL_DESC = desc("bake_em_all");
@@ -29,12 +30,12 @@ public class CAdvancementProvider extends ForgeAdvancementProvider {
         super(dataGenerator.getPackOutput(), lookupProvider, fileHelper, List.of(new AdvancementGen()));
     }
 
-    private static class AdvancementGen implements ForgeAdvancementProvider.AdvancementGenerator {
+    private static class AdvancementGen implements AdvancementProvider.AdvancementGenerator {
 
         @Override
-        public void generate(HolderLookup.Provider registries, Consumer<Advancement> saver, ExistingFileHelper existingFileHelper) {
-            ResourceLocation seedyPlaceId = new ResourceLocation("husbandry/plant_seed");
-            ResourceLocation bestFriendsId = new ResourceLocation("husbandry/tame_an_animal");
+        public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper) {
+            ResourceLocation seedyPlaceId = ResourceLocation.withDefaultNamespace("husbandry/plant_seed");
+            ResourceLocation bestFriendsId = ResourceLocation.withDefaultNamespace("husbandry/tame_an_animal");
 
             // Bake em all!
             Advancement.Builder.advancement()
@@ -43,7 +44,7 @@ public class CAdvancementProvider extends ForgeAdvancementProvider {
                             Component.translatable(BAKE_EM_ALL),
                             Component.translatable(BAKE_EM_ALL_DESC),
                             null,
-                            FrameType.TASK,
+                            AdvancementType.TASK,
                             false, true, false)
                     .addCriterion("has_all_cookies", SimpleTypeTrigger.TriggerInstance.bakeEmAll())
                     .save(saver, References.BAKE_EM_ALL_ADV.toString());
@@ -55,7 +56,7 @@ public class CAdvancementProvider extends ForgeAdvancementProvider {
                             Component.translatable(YOU_MONSTER),
                             Component.translatable(YOU_MONSTER_DESC),
                             null,
-                            FrameType.TASK,
+                            AdvancementType.TASK,
                             false, true, false)
                     .addCriterion("poison_parrot", SimpleTypeTrigger.TriggerInstance.poisonParrot())
                     .save(saver, References.YOU_MONSTER_ADV.toString());

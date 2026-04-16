@@ -4,9 +4,9 @@ import com.cookiejar.cookielicious.common.core.Cookielicious;
 import com.cookiejar.cookielicious.common.core.registry.CookieliciousItems;
 import com.teamabnormals.blueprint.core.util.TradeUtil;
 import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 
 import static com.teamabnormals.blueprint.core.util.TradeUtil.BlueprintTrade;
 

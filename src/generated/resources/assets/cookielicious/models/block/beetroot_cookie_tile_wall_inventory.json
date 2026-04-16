@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/wall_inventory",
-  "textures": {
-    "wall": "cookielicious:block/beetroot_cookie_tiles"
-  }
-}

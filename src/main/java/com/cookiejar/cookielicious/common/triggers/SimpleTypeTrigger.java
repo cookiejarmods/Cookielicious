@@ -1,63 +1,53 @@
 package com.cookiejar.cookielicious.common.triggers;
 
-import com.cookiejar.cookielicious.common.core.Cookielicious;
-import com.google.gson.JsonObject;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.ResourceLocation;
+import com.cookiejar.cookielicious.common.core.registry.CookieliciousTriggers;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.util.StringRepresentable;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class SimpleTypeTrigger extends SimpleCriterionTrigger<SimpleTypeTrigger.TriggerInstance> {
 
-    private static final ResourceLocation ID = Cookielicious.modPrefix("simple_type_trigger");
-
-    public ResourceLocation getId() {
-        return ID;
-    }
-
     @Override
-    public SimpleTypeTrigger.TriggerInstance createInstance(JsonObject jsonObject, ContextAwarePredicate predicate, DeserializationContext context) {
-        String typeName = GsonHelper.getAsString(jsonObject, "type");
-        Type type = Type.getFromName(typeName);
-
-        if (type == null)
-            throw new IllegalArgumentException("Attempted to create SimpleTypeTrigger instance with non-existent Type: '" + typeName + "'");
-
-        return new SimpleTypeTrigger.TriggerInstance(predicate, type);
+    public Codec<SimpleTypeTrigger.TriggerInstance> codec() {
+        return SimpleTypeTrigger.TriggerInstance.CODEC;
     }
 
     public void trigger(ServerPlayer player, Type type) {
-        this.trigger(player, (instance) -> instance.matches(player, type));
+        trigger(player, (instance) -> instance.matches(player, type));
     }
 
-    public static class TriggerInstance extends AbstractCriterionTriggerInstance {
+    public record TriggerInstance(Optional<ContextAwarePredicate> player,
+                                  Type type) implements SimpleCriterionTrigger.SimpleInstance {
+        public static final Codec<SimpleTypeTrigger.TriggerInstance> CODEC = RecordCodecBuilder.create(
+                inst -> inst.group(
+                                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(SimpleTypeTrigger.TriggerInstance::player),
+                                StringRepresentable.fromEnum(Type::values).fieldOf("type").forGetter(SimpleTypeTrigger.TriggerInstance::type)
+                        )
+                        .apply(inst, SimpleTypeTrigger.TriggerInstance::new)
+        );
 
-        private final Type type;
-
-        public TriggerInstance(ContextAwarePredicate predicate, Type type) {
-            super(SimpleTypeTrigger.ID, predicate);
-            this.type = type;
+        public static Criterion<TriggerInstance> bakeEmAll() {
+            ContextAwarePredicate predicate = ContextAwarePredicate.create();
+            return CookieliciousTriggers.SIMPLE_TYPE.get().createCriterion(
+                    new SimpleTypeTrigger.TriggerInstance(Optional.of(predicate), Type.BAKE_EM_ALL));
         }
 
-        public static SimpleTypeTrigger.TriggerInstance bakeEmAll() {
-            return new SimpleTypeTrigger.TriggerInstance(ContextAwarePredicate.ANY, Type.BAKE_EM_ALL);
-        }
-
-        public static SimpleTypeTrigger.TriggerInstance poisonParrot() {
-            return new SimpleTypeTrigger.TriggerInstance(ContextAwarePredicate.ANY, Type.POISON_PARROT);
+        public static Criterion<SimpleTypeTrigger.TriggerInstance> poisonParrot() {
+            ContextAwarePredicate predicate = ContextAwarePredicate.create();
+            return CookieliciousTriggers.SIMPLE_TYPE.get().createCriterion(
+                    new SimpleTypeTrigger.TriggerInstance(Optional.of(predicate), Type.POISON_PARROT));
         }
 
         public boolean matches(ServerPlayer serverPlayer, Type type) {
             return this.type == type;
-        }
-
-        public JsonObject serializeToJson(SerializationContext context) {
-            JsonObject jsonObject = super.serializeToJson(context);
-            jsonObject.addProperty("type", type.getSerializedName());
-            return jsonObject;
         }
     }
 

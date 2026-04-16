@@ -6,14 +6,14 @@ import com.cookiejar.cookielicious.common.core.registry.CookieliciousBlocks;
 import com.cookiejar.cookielicious.common.core.registry.CookieliciousItems;
 import com.cookiejar.cookielicious.common.tag.CItemTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -35,6 +35,7 @@ public class CItemTagsProvider extends ItemTagsProvider {
         // Our cookies!!! :O
         CookieliciousItems.ALL_COOKIES.forEach((regObj) -> tag(CItemTags.COOKIES).add(regObj.get()));
 
+        // TODO - Some cookies from other mods are missing atm; mods are not up to date
         // The vanilla minecraft cookie and cookies from other mods.
         tag(CItemTags.COOKIES)
                 .add(Items.COOKIE)
@@ -43,10 +44,10 @@ public class CItemTagsProvider extends ItemTagsProvider {
                 .addOptional(registryId(CookieliciousCompat.ABNORMALS_DELIGHT, "maple_cookie"))
                 .addOptional(registryId(CookieliciousCompat.FARMERS_DELIGHT, "honey_cookie"))
                 .addOptional(registryId(CookieliciousCompat.FARMERS_DELIGHT, "sweet_berry_cookie"))
-                .addOptional(registryId(CookieliciousCompat.MINERS_DELIGHT, "bat_cookie"))
-                .addOptional(registryId(CookieliciousCompat.FARMERS_RESPITE, "green_tea_cookie"))
-                .addOptional(registryId(CookieliciousCompat.COLLECTORS_REAP, "lime_cookie")
-                );
+        //.addOptional(registryId(CookieliciousCompat.MINERS_DELIGHT, "bat_cookie"))
+        //.addOptional(registryId(CookieliciousCompat.FARMERS_RESPITE, "green_tea_cookie"))
+        //.addOptional(registryId(CookieliciousCompat.COLLECTORS_REAP, "lime_cookie"))
+        ;
 
         // Chocolaty cookies of the parrot-murder variety.
         tag(CItemTags.CHOCOLATE_COOKIES).add(
@@ -56,9 +57,9 @@ public class CItemTagsProvider extends ItemTagsProvider {
     }
 
     private ResourceLocation registryId(String namespace, String path) {
-        ResourceLocation id = new ResourceLocation(namespace, path);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace, path);
 
-        if (!ForgeRegistries.ITEMS.containsKey(id))
+        if (!BuiltInRegistries.ITEM.containsKey(id))
             throw new IllegalArgumentException("Can't find Item with ID '" + id + "' as it does not exist in the registry!");
 
         return id;

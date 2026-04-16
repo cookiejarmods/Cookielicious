@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "cookielicious:block/bat_cookie_tiles",
-    "side": "cookielicious:block/bat_cookie_tiles",
-    "top": "cookielicious:block/bat_cookie_tiles"
-  }
-}

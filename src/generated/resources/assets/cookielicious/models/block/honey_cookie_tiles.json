@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "cookielicious:block/honey_cookie_tiles"
-  }
-}
