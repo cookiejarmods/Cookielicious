@@ -115,16 +115,18 @@ public class CookieliciousItems {
         // Cookie blocks
         entry.tab(BUILDING_BLOCKS);
         CookieliciousBlocks.ALL_COOKIE_BLOCKS.forEach((cookieTileSet) -> {
-            if (TABS_FOR_ITEMS.get(BUILDING_BLOCKS).contains(cookieTileSet.tiles())) {
+            List<Item> items = TABS_FOR_ITEMS.get(BUILDING_BLOCKS).stream().map(DeferredItem::asItem).toList();
+
+            if (items.contains(cookieTileSet.tiles().asItem())) {
                 entry.addItems(cookieTileSet.tiles());
             }
-            if (TABS_FOR_ITEMS.get(BUILDING_BLOCKS).contains(cookieTileSet.stairs())) {
+            if (items.contains(cookieTileSet.stairs().asItem())) {
                 entry.addItems(cookieTileSet.stairs());
             }
-            if (TABS_FOR_ITEMS.get(BUILDING_BLOCKS).contains(cookieTileSet.slab())) {
+            if (items.contains(cookieTileSet.slab().asItem())) {
                 entry.addItems(cookieTileSet.slab());
             }
-            if (TABS_FOR_ITEMS.get(BUILDING_BLOCKS).contains(cookieTileSet.wall())) {
+            if (items.contains(cookieTileSet.wall().asItem())) {
                 entry.addItems(cookieTileSet.wall());
             }
         });
