@@ -1,13 +1,8 @@
 package com.cookiejar.cookielicious.common.core.other;
 
-import com.cookiejar.cookielicious.common.item.CookieItem;
-import com.cookiejar.cookielicious.common.item.HealingCookieItem;
-import com.teamabnormals.blueprint.core.util.DataUtil;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.Item;
-
 public class CookieliciousCompat {
 
+    // Dependency mod IDs
     public static final String MINECRAFT = "minecraft";
     public static final String NEAPOLITAN = "neapolitan";
     public static final String FARMERS_DELIGHT = "farmersdelight";
@@ -21,17 +16,4 @@ public class CookieliciousCompat {
     public static final String MINERS_DELIGHT = "minersdelight";
     public static final String FARMERS_RESPITE = "farmersrespite";
     public static final String COLLECTORS_REAP = "collectorsreap";
-
-    public static void registerCompat() {
-        registerCompostables();
-    }
-
-    public static void registerCompostables() {
-        for (Item item : BuiltInRegistries.ITEM.stream().toList()) {
-            if (item instanceof CookieItem || item instanceof HealingCookieItem) {
-                // TODO - Add via json instead
-                DataUtil.registerCompostable(item, 0.85F);
-            }
-        }
-    }
 }

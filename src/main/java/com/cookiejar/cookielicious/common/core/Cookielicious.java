@@ -1,6 +1,5 @@
 package com.cookiejar.cookielicious.common.core;
 
-import com.cookiejar.cookielicious.common.core.other.CookieliciousCompat;
 import com.cookiejar.cookielicious.common.core.registry.CookieliciousBlocks;
 import com.cookiejar.cookielicious.common.core.registry.CookieliciousItems;
 import com.cookiejar.cookielicious.common.core.registry.CookieliciousLootConditions;
@@ -49,7 +48,7 @@ public class Cookielicious {
     }
 
     private void doCommonStuff(final FMLCommonSetupEvent event) {
-        event.enqueueWork(CookieliciousCompat::registerCompat);
+        //event.enqueueWork(CookieliciousCompat::registerCompat);
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -73,6 +72,7 @@ public class Cookielicious {
         generator.addProvider(server, new CRecipeProvider(generator, lookupProvider));
         generator.addProvider(server, new CLootTableProvider(generator, lookupProvider));
         generator.addProvider(server, new CAdvancementProvider(generator, lookupProvider, fileHelper));
+        generator.addProvider(server, new CDataMapProvider(generator, lookupProvider));
     }
 
     public static ResourceLocation modPrefix(String path) {
