@@ -1,0 +1,3 @@
+1.20.1-4.0.5
+    - Bumped min required Forge version to 47.4.+
+    - Fixed potentially unsafe referencing of game objects from dependencies.
