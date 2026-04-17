@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "cookielicious:block/lime_cookie_tiles",
-    "side": "cookielicious:block/lime_cookie_tiles",
-    "top": "cookielicious:block/lime_cookie_tiles"
-  }
-}

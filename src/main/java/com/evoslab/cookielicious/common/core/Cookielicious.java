@@ -1,25 +1,23 @@
 package com.evoslab.cookielicious.common.core;
 
+import com.evoslab.cookielicious.common.core.other.CookieliciousCompat;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousItems;
+import com.evoslab.cookielicious.common.core.registry.CookieliciousLootConditions;
 import com.evoslab.cookielicious.common.event.CEventsListener;
 import com.evoslab.cookielicious.common.triggers.CookieliciousTriggers;
 import com.evoslab.cookielicious.datagen.client.CBlockStateProvider;
 import com.evoslab.cookielicious.datagen.client.CItemModelProvider;
 import com.evoslab.cookielicious.datagen.client.CLangProvider;
 import com.evoslab.cookielicious.datagen.server.*;
-import com.evoslab.cookielicious.common.core.other.CookieliciousCompat;
-import com.evoslab.cookielicious.common.core.registry.CookieliciousLootConditions;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -36,8 +34,8 @@ public class Cookielicious {
     public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MOD_ID);
 
 
-    public Cookielicious() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public Cookielicious(FMLJavaModLoadingContext context) {
+        IEventBus modEventBus = context.getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new CEventsListener());
 
@@ -47,20 +45,17 @@ public class Cookielicious {
 
         CookieliciousLootConditions.LOOT_ITEM_CONDITION_TYPE.register(modEventBus);
 
-        modEventBus.addListener(this::doCommonStuff);
-        modEventBus.addListener(this::doClientStuff);
+        modEventBus.addListener(this::onCommonSetup);
+        modEventBus.addListener(this::onClientSetup);
         modEventBus.addListener(this::gatherData);
-
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-            CookieliciousItems.setupTabEditors();
-        });
     }
 
-	private void doCommonStuff(final FMLCommonSetupEvent event) {
+    private void onCommonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(CookieliciousCompat::registerCompat);
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
+    private void onClientSetup(final FMLClientSetupEvent event) {
+        event.enqueueWork(CookieliciousItems::setupTabEditors);
     }
 
     @SubscribeEvent
@@ -83,7 +78,7 @@ public class Cookielicious {
         generator.addProvider(server, new CAdvancementProvider(generator, lookupProvider, fileHelper));
     }
 
-    public static ResourceLocation modPrefix(String path) {
-        return new ResourceLocation(Cookielicious.MOD_ID, path);
+    public static ResourceLocation rl(String path) {
+        return ResourceLocation.fromNamespaceAndPath(Cookielicious.MOD_ID, path);
     }
 }

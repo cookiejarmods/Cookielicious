@@ -13,10 +13,10 @@ public class CItemTags {
 
 
     private static TagKey<Item> forgeTag(String path) {
-        return ItemTags.create(new ResourceLocation("forge", path));
+        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", path));
     }
 
     private static TagKey<Item> modTag(String path) {
-        return ItemTags.create(Cookielicious.modPrefix(path));
+        return ItemTags.create(Cookielicious.rl(path));
     }
 }

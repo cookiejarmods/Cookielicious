@@ -1,45 +1,45 @@
-modLoader="javafml"
-loaderVersion="[47,)"
-license="All rights reserved"
-issueTrackerURL="https://github.com/cookiejarmods/Cookielicious/issues"
+modLoader = "javafml"
+loaderVersion = "[47,)"
+license = "All rights reserved"
+issueTrackerURL = "https://github.com/cookiejarmods/Cookielicious/issues"
 
 [[mods]]
-modId="cookielicious"
-version="${file.jarVersion}"
-displayName="Cookielicious"
-logoFile="cookielicious.png"
-credits="Evo, Stardust, AvocadoSpud, Nary, EltrutLikes, JustinPlayzz, Uraneptus"
-authors="Evo's Lab"
-description='''
+modId = "cookielicious"
+version = "${file.jarVersion}"
+displayName = "Cookielicious"
+logoFile = "cookielicious.png"
+credits = "Evo, Sarinsa, Stardust, AvocadoSpud, Nary, EltrutLikes, JustinPlayzz, Uraneptus"
+authors = "The Cookiejar Team"
+description = '''
 Cookielicious is an addon for Neapolitan that adds more cookie themed items.
 '''
-itemIcon="cookielicious:cookie_tiles" #catalouge
+itemIcon = "cookielicious:cookie_tiles" #catalouge
 
 
 [[dependencies.cookielicious]]
-    modId="forge"
-    mandatory=true
-    versionRange="[47,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "forge"
+mandatory = true
+versionRange = "[47.4,)"
+ordering = "NONE"
+side = "BOTH"
 
 [[dependencies.cookielicious]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.20.1,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
 
 [[dependencies.cookielicious]]
-    modId="neapolitan" 
-    mandatory=true 
-    versionRange="[5.0.0,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "neapolitan"
+mandatory = true
+versionRange = "[5.0.0,)"
+ordering = "AFTER"
+side = "BOTH"
 
 [[dependencies.cookielicious]]
-    modId="blueprint"
-    mandatory=true
-    versionRange="[7.1,)"
-    ordering="AFTER"
-    side="BOTH"
+modId = "blueprint"
+mandatory = true
+versionRange = "[7.1,)"
+ordering = "AFTER"
+side = "BOTH"

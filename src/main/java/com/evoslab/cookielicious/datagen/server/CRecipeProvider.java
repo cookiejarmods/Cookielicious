@@ -17,7 +17,6 @@ import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.http.cookie.Cookie;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -74,6 +73,7 @@ public class CRecipeProvider extends RecipeProvider {
                 .save(consumer);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static void addModLoadedCookieRecipe(String modId, Supplier<? extends ItemLike> result,
                                                  Supplier<? extends ItemLike> input, Consumer<FinishedRecipe> consumer) {
         conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, result.get(), 8)
@@ -129,7 +129,7 @@ public class CRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer, null);
 
         conditionalModLoadedRecipe(modId, SingleItemRecipeBuilder.stonecutting(Ingredient.of(tiles), RecipeCategory.BUILDING_BLOCKS, cookieTileSet.stairs().get())
-                .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer,
+                        .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer,
                 getConversionRecipeName(cookieTileSet.stairs().get(), tiles) + "_stonecutting");
         //Slab
         conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, cookieTileSet.slab().get(), 6)
@@ -137,7 +137,7 @@ public class CRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer, null);
 
         conditionalModLoadedRecipe(modId, SingleItemRecipeBuilder.stonecutting(Ingredient.of(tiles), RecipeCategory.BUILDING_BLOCKS, cookieTileSet.slab().get(), 2)
-                .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer,
+                        .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer,
                 getConversionRecipeName(cookieTileSet.slab().get(), tiles) + "_stonecutting");
         //Wall
         conditionalModLoadedRecipe(modId, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, cookieTileSet.wall().get(), 6)
@@ -145,35 +145,38 @@ public class CRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer, null);
 
         conditionalModLoadedRecipe(modId, SingleItemRecipeBuilder.stonecutting(Ingredient.of(tiles), RecipeCategory.BUILDING_BLOCKS, cookieTileSet.wall().get())
-                .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer,
+                        .unlockedBy(getHasName(tiles), has(tiles)), RecipeCategory.BUILDING_BLOCKS, consumer,
                 getConversionRecipeName(cookieTileSet.wall().get(), tiles) + "_stonecutting");
     }
 
     public static void conditionalModLoadedRecipe(String modId, RecipeBuilder recipe, RecipeCategory category, Consumer<FinishedRecipe> consumer, @Nullable String customPath) {
         ResourceLocation recipeId = customPath == null
-                ? Cookielicious.modPrefix("conditional/" + RecipeBuilder.getDefaultRecipeId(recipe.getResult()).getPath())
-                : Cookielicious.modPrefix("conditional/" + customPath);
+                ? Cookielicious.rl("conditional/" + RecipeBuilder.getDefaultRecipeId(recipe.getResult()).getPath())
+                : Cookielicious.rl("conditional/" + customPath);
 
         ConditionalRecipe.builder()
                 .addCondition(new ModLoadedCondition(modId))
                 .addRecipe(consumer1 -> recipe.save(consumer1, recipeId))
-                .generateAdvancement(new ResourceLocation(recipeId.getNamespace(), "recipes/" + category.getFolderName() + "/" + recipeId.getPath()))
+                .generateAdvancement(ResourceLocation.fromNamespaceAndPath(recipeId.getNamespace(), "recipes/" + category.getFolderName() + "/" + recipeId.getPath()))
                 .build(consumer, recipeId);
     }
 
-    public static void conditionalRecipe(ICondition condition, RecipeBuilder recipe, RecipeCategory category, Consumer<FinishedRecipe> consumer, String customPath) {
+    public static void conditionalRecipe(ICondition condition, RecipeBuilder recipe, RecipeCategory category, Consumer<FinishedRecipe> consumer, @Nullable String customPath) {
         ResourceLocation recipeId = customPath == null
-                ? Cookielicious.modPrefix("conditional/" + RecipeBuilder.getDefaultRecipeId(recipe.getResult()).getPath())
-                : Cookielicious.modPrefix("conditional/" + customPath);
+                ? Cookielicious.rl("conditional/" + RecipeBuilder.getDefaultRecipeId(recipe.getResult()).getPath())
+                : Cookielicious.rl("conditional/" + customPath);
 
         ConditionalRecipe.builder()
                 .addCondition(condition)
                 .addRecipe(consumer1 -> recipe.save(consumer1, recipeId))
-                .generateAdvancement(new ResourceLocation(recipeId.getNamespace(), "recipes/" + category.getFolderName() + "/" + recipeId.getPath()))
+                .generateAdvancement(ResourceLocation.fromNamespaceAndPath(recipeId.getNamespace(), "recipes/" + category.getFolderName() + "/" + recipeId.getPath()))
                 .build(consumer, recipeId);
     }
 
     public static Item getItem(String modId, String id) {
-        return ForgeRegistries.ITEMS.getValue(new ResourceLocation(modId, id));
+        Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath(modId, id));
+        if (item == null)
+            throw new IllegalArgumentException("Item with ID '" + id + "' does not exist in the registry!");
+        return item;
     }
 }

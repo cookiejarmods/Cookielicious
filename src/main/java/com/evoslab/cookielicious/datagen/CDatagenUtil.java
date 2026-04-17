@@ -7,46 +7,40 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Objects;
+
 /**
- * Copied from the Original SMDatagenUtil in SullysMod, taken with permission
- * @author Uraneptus
+ * Modified copy-paste of the SMDatagenUtil class in SullysMod, taken with permission.
  *
+ * @author Uraneptus
  */
 public class CDatagenUtil {
-    public static final String LAYER0 = "layer0";
+
+    public static final String LAYER_0 = "layer0";
     public static final String GENERATED = "item/generated";
     public static final String HANDHELD = "item/handheld";
 
     public static String name(Block block) {
-        return ForgeRegistries.BLOCKS.getKey(block).getPath();
+        return Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).getPath();
     }
 
     public static String name(Item item) {
-        return ForgeRegistries.ITEMS.getKey(item).getPath();
+        return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item)).getPath();
     }
 
     public static ResourceLocation modBlockLocation(String path) {
-        return Cookielicious.modPrefix(ModelProvider.BLOCK_FOLDER + "/" + path);
+        return Cookielicious.rl(ModelProvider.BLOCK_FOLDER + "/" + path);
     }
 
     public static ResourceLocation modItemLocation(String path) {
-        return Cookielicious.modPrefix(ModelProvider.ITEM_FOLDER + "/" + path);
+        return Cookielicious.rl(ModelProvider.ITEM_FOLDER + "/" + path);
     }
 
     public static ResourceLocation vanillaBlockLocation(String path) {
-        return new ResourceLocation(ModelProvider.BLOCK_FOLDER + "/" + path);
+        return ResourceLocation.withDefaultNamespace(ModelProvider.BLOCK_FOLDER + "/" + path);
     }
 
     public static ResourceLocation vanillaItemLocation(String path) {
-        return new ResourceLocation(ModelProvider.ITEM_FOLDER + "/" + path);
+        return ResourceLocation.withDefaultNamespace(ModelProvider.ITEM_FOLDER + "/" + path);
     }
-
-    public static ResourceLocation craftingPath(String name) {
-        return Cookielicious.modPrefix("crafting/" + name);
-    }
-
-    public static ResourceLocation cookingPath(String name) {
-        return Cookielicious.modPrefix("cooking/" + name);
-    }
-
 }

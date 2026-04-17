@@ -2,7 +2,7 @@ package com.evoslab.cookielicious.datagen.server;
 
 import com.evoslab.cookielicious.common.core.Cookielicious;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousBlocks;
-import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
+import com.evoslab.cookielicious.common.core.registry.CookieliciousBlocks.ToolType;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
@@ -12,7 +12,6 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
-import com.evoslab.cookielicious.common.core.registry.CookieliciousBlocks.ToolType;
 
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;

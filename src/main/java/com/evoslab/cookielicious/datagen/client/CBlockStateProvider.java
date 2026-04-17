@@ -1,21 +1,20 @@
 package com.evoslab.cookielicious.datagen.client;
 
 import com.evoslab.cookielicious.common.core.Cookielicious;
-import com.evoslab.cookielicious.common.core.registry.CookieliciousBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
 
-import static com.evoslab.cookielicious.datagen.CDatagenUtil.*;
-import static com.evoslab.cookielicious.common.core.registry.CookieliciousBlocks.*;
+import static com.evoslab.cookielicious.common.core.registry.CookieliciousBlocks.ALL_COOKIE_BLOCKS;
+import static com.evoslab.cookielicious.datagen.CDatagenUtil.modBlockLocation;
+import static com.evoslab.cookielicious.datagen.CDatagenUtil.name;
 
 public class CBlockStateProvider extends BlockStateProvider {
 

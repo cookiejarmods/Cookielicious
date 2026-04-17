@@ -1,26 +1,19 @@
 package com.evoslab.cookielicious.datagen.server;
 
 import com.evoslab.cookielicious.common.core.Cookielicious;
-import com.evoslab.cookielicious.common.core.registry.CookieliciousBlocks;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousItems;
 import com.evoslab.cookielicious.common.triggers.SimpleTypeTrigger;
 import com.evoslab.cookielicious.common.util.References;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
-import net.minecraft.advancements.RequirementsStrategy;
-import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
@@ -40,8 +33,8 @@ public class CAdvancementProvider extends ForgeAdvancementProvider {
 
         @Override
         public void generate(HolderLookup.Provider registries, Consumer<Advancement> saver, ExistingFileHelper existingFileHelper) {
-            ResourceLocation seedyPlaceId = new ResourceLocation("husbandry/plant_seed");
-            ResourceLocation bestFriendsId = new ResourceLocation("husbandry/tame_an_animal");
+            ResourceLocation seedyPlaceId = ResourceLocation.withDefaultNamespace("husbandry/plant_seed");
+            ResourceLocation bestFriendsId = ResourceLocation.withDefaultNamespace("husbandry/tame_an_animal");
 
             // Bake em all!
             Advancement.Builder.advancement()

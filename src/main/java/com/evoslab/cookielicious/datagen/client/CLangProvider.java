@@ -6,14 +6,10 @@ import com.evoslab.cookielicious.common.core.registry.CookieliciousItems;
 import com.evoslab.cookielicious.datagen.server.CAdvancementProvider;
 import com.google.common.collect.Lists;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.StringUtil;
-import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Objects;

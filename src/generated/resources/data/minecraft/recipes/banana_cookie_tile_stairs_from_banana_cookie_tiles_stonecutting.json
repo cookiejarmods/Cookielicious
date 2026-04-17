@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "cookielicious:banana_cookie_tiles"
-  },
-  "result": "cookielicious:banana_cookie_tile_stairs"
-}

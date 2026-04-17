@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 
 public class SimpleTypeTrigger extends SimpleCriterionTrigger<SimpleTypeTrigger.TriggerInstance> {
 
-    private static final ResourceLocation ID = Cookielicious.modPrefix("simple_type_trigger");
+    private static final ResourceLocation ID = Cookielicious.rl("simple_type_trigger");
 
     public ResourceLocation getId() {
         return ID;
@@ -68,6 +68,7 @@ public class SimpleTypeTrigger extends SimpleCriterionTrigger<SimpleTypeTrigger.
         Type(String name) {
             this.name = name;
         }
+
         final String name;
 
         @Override

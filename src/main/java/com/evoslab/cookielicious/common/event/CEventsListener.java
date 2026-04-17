@@ -63,6 +63,7 @@ public class CEventsListener {
                 if (player instanceof ServerPlayer serverPlayer) {
                     CookieliciousTriggers.SIMPLE_TYPE.trigger(serverPlayer, SimpleTypeTrigger.Type.POISON_PARROT);
                 }
+                // noinspection resource
                 event.setCancellationResult(InteractionResult.sidedSuccess(player.level().isClientSide));
                 event.setCanceled(true);
             }
@@ -96,7 +97,7 @@ public class CEventsListener {
     @SubscribeEvent
     public void onAdvancementProgress(AdvancementEvent.AdvancementProgressEvent event) {
         if (event.getProgressType() == AdvancementEvent.AdvancementProgressEvent.ProgressType.REVOKE
-        && event.getAdvancement().getId().equals(References.BAKE_EM_ALL_ADV)) {
+                && event.getAdvancement().getId().equals(References.BAKE_EM_ALL_ADV)) {
             if (event.getEntity() instanceof ServerPlayer serverPlayer) {
                 // Clear progress saved to persistent player data
                 CompoundTag persistentData = serverPlayer.getPersistentData();
@@ -151,6 +152,7 @@ public class CEventsListener {
 
         ListTag listTag = modData.getList(COOKIES_OBTAINED_KEY, Tag.TAG_STRING);
 
+        // noinspection ConstantConditions
         String itemId = ForgeRegistries.ITEMS.getKey(craftedItem.getItem()).toString();
         boolean exists = false;
 
@@ -177,7 +179,7 @@ public class CEventsListener {
 
             Item item = ForgeRegistries.ITEMS.getValue(id);
 
-            if (item != null && allCookiesCopy.contains(item)) {
+            if (item != null) {
                 allCookiesCopy.remove(item);
             }
         }
@@ -188,12 +190,15 @@ public class CEventsListener {
         }
     }
 
-    /** Simple container listener to check for obtained cookies. */
+    /**
+     * Simple container listener to check for obtained cookies.
+     */
     private static ContainerListener createCookieListener(ServerPlayer serverPlayer) {
         return new ContainerListener() {
             {
                 player = serverPlayer;
             }
+
             final Player player;
 
             @Override

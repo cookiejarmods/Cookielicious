@@ -5,20 +5,15 @@ import com.evoslab.cookielicious.common.core.other.CookieliciousCompat;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousBlocks;
 import com.evoslab.cookielicious.common.core.registry.CookieliciousItems;
 import com.evoslab.cookielicious.common.tag.CItemTags;
-import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.http.cookie.Cookie;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -51,7 +46,7 @@ public class CItemTagsProvider extends ItemTagsProvider {
                 .addOptional(registryId(CookieliciousCompat.MINERS_DELIGHT, "bat_cookie"))
                 .addOptional(registryId(CookieliciousCompat.FARMERS_RESPITE, "green_tea_cookie"))
                 .addOptional(registryId(CookieliciousCompat.COLLECTORS_REAP, "lime_cookie")
-        );
+                );
 
         // Chocolaty cookies of the parrot-murder variety.
         tag(CItemTags.CHOCOLATE_COOKIES).add(
@@ -61,7 +56,7 @@ public class CItemTagsProvider extends ItemTagsProvider {
     }
 
     private ResourceLocation registryId(String namespace, String path) {
-        ResourceLocation id = new ResourceLocation(namespace, path);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace, path);
 
         if (!ForgeRegistries.ITEMS.containsKey(id))
             throw new IllegalArgumentException("Can't find Item with ID '" + id + "' as it does not exist in the registry!");
