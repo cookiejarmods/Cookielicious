@@ -7,6 +7,4 @@ public class HealingCookieItem extends HealingItem {
     public HealingCookieItem(float healAmount, Properties properties) {
         super(healAmount, properties);
     }
-
-
 }

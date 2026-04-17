@@ -29,7 +29,7 @@ public class CRecipeProvider extends RecipeProvider {
         super(generator.getPackOutput(), lookupProvider);
     }
 
-    // TODO - Readd commented out recipe gen when the relevant mods update
+    // TODO - Re-add commented out recipe gen when the relevant mods update
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
         addCookieRecipe(CookieliciousItems.VANILLA_COOKIE, () -> getItem(CookieliciousCompat.NEAPOLITAN, "dried_vanilla_pods"), recipeOutput);
@@ -156,8 +156,8 @@ public class CRecipeProvider extends RecipeProvider {
 
     public static void conditionalModLoadedRecipe(String modId, RecipeBuilder recipe, RecipeOutput recipeOutput, @Nullable String customPath) {
         ResourceLocation recipeId = customPath == null
-                ? Cookielicious.modPrefix("conditional/" + RecipeBuilder.getDefaultRecipeId(recipe.getResult()).getPath())
-                : Cookielicious.modPrefix("conditional/" + customPath);
+                ? Cookielicious.rl("conditional/" + RecipeBuilder.getDefaultRecipeId(recipe.getResult()).getPath())
+                : Cookielicious.rl("conditional/" + customPath);
 
         RecipeOutput conditionalOutput = recipeOutput.withConditions(new ModLoadedCondition(modId));
         recipe.save(conditionalOutput, recipeId);
@@ -165,8 +165,8 @@ public class CRecipeProvider extends RecipeProvider {
 
     public static void conditionalRecipe(RecipeBuilder recipe, RecipeOutput recipeOutput, String customPath, ICondition... conditions) {
         ResourceLocation recipeId = customPath == null
-                ? Cookielicious.modPrefix("conditional/" + RecipeBuilder.getDefaultRecipeId(recipe.getResult()).getPath())
-                : Cookielicious.modPrefix("conditional/" + customPath);
+                ? Cookielicious.rl("conditional/" + RecipeBuilder.getDefaultRecipeId(recipe.getResult()).getPath())
+                : Cookielicious.rl("conditional/" + customPath);
 
         RecipeOutput conditionalOutput = recipeOutput.withConditions(conditions);
         recipe.save(conditionalOutput, recipeId);

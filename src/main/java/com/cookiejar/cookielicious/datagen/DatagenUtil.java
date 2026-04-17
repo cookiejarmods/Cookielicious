@@ -20,11 +20,11 @@ public class DatagenUtil {
     }
 
     public static ResourceLocation modBlock(String path) {
-        return Cookielicious.modPrefix(ModelProvider.BLOCK_FOLDER + "/" + path);
+        return Cookielicious.rl(ModelProvider.BLOCK_FOLDER + "/" + path);
     }
 
     public static ResourceLocation modItem(String path) {
-        return Cookielicious.modPrefix(ModelProvider.ITEM_FOLDER + "/" + path);
+        return Cookielicious.rl(ModelProvider.ITEM_FOLDER + "/" + path);
     }
 
     public static ResourceLocation vanillaBlock(String path) {

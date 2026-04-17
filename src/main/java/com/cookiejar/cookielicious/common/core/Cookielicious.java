@@ -21,14 +21,25 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.CompletableFuture;
 
 @Mod(Cookielicious.MOD_ID)
 public class Cookielicious {
 
+    /**
+     * The mod's ID.
+     */
     public static final String MOD_ID = "cookielicious";
-
+    /**
+     * Logger instance with our namespace.
+     */
+    public static final Logger LOG = LogManager.getLogger(MOD_ID);
+    /**
+     * Blueprint registry helper.
+     */
     public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MOD_ID);
 
 
@@ -75,7 +86,10 @@ public class Cookielicious {
         generator.addProvider(server, new CDataMapProvider(generator, lookupProvider));
     }
 
-    public static ResourceLocation modPrefix(String path) {
+    /**
+     * @return A ResourceLocation composed of our mod's namespace and the given path.
+     */
+    public static ResourceLocation rl(String path) {
         return ResourceLocation.fromNamespaceAndPath(Cookielicious.MOD_ID, path);
     }
 }

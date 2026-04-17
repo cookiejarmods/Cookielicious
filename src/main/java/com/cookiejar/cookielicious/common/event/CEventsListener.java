@@ -62,6 +62,7 @@ public class CEventsListener {
                 if (player instanceof ServerPlayer serverPlayer) {
                     CookieliciousTriggers.SIMPLE_TYPE.get().trigger(serverPlayer, SimpleTypeTrigger.Type.POISON_PARROT);
                 }
+                // noinspection resource
                 event.setCancellationResult(InteractionResult.sidedSuccess(player.level().isClientSide));
                 event.setCanceled(true);
             }

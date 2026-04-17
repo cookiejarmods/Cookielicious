@@ -58,6 +58,7 @@ public class CookieliciousBlocks {
         return set;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static DeferredBlock<Block> registerCookieTiles(String name, @Nullable ToolType toolType, String... modIds) {
         DeferredBlock<Block> blockObject = registerCompatBlock(name, () -> new Block(Properties.COOKIE), Set.of(modIds), CreativeModeTabs.BUILDING_BLOCKS);
         if (toolType != null) {
@@ -66,6 +67,7 @@ public class CookieliciousBlocks {
         return blockObject;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static DeferredBlock<StairBlock> registerCookieStairs(String name, Supplier<? extends Block> parentBlock, @Nullable ToolType toolType, String... modIds) {
         DeferredBlock<StairBlock> blockObject = registerCompatBlock(name, () -> new StairBlock(parentBlock.get().defaultBlockState(), Properties.COOKIE), Set.of(modIds), CreativeModeTabs.BUILDING_BLOCKS);
         if (toolType != null) {
@@ -74,6 +76,7 @@ public class CookieliciousBlocks {
         return blockObject;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static DeferredBlock<SlabBlock> registerCookieSlabs(String name, @Nullable ToolType toolType, String... modIds) {
         DeferredBlock<SlabBlock> blockObject = registerCompatBlock(name, () -> new SlabBlock(Properties.COOKIE), Set.of(modIds), CreativeModeTabs.BUILDING_BLOCKS);
         if (toolType != null) {
@@ -82,6 +85,7 @@ public class CookieliciousBlocks {
         return blockObject;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static DeferredBlock<WallBlock> registerCookieWalls(String name, @Nullable ToolType toolType, String... modIds) {
         DeferredBlock<WallBlock> blockObject = registerCompatBlock(name, () -> new WallBlock(Properties.COOKIE), Set.of(modIds), CreativeModeTabs.BUILDING_BLOCKS);
         if (toolType != null) {
@@ -90,6 +94,7 @@ public class CookieliciousBlocks {
         return blockObject;
     }
 
+    @SuppressWarnings("SameParameterValue")
     @SafeVarargs
     private static <T extends Block> DeferredBlock<T> registerCompatBlock(String name, Supplier<T> blockSupplier, Set<String> modIds, ResourceKey<CreativeModeTab>... creativeModeTabs) {
         DeferredBlock<T> regObj = HELPER.createBlockNoItem(name, blockSupplier);

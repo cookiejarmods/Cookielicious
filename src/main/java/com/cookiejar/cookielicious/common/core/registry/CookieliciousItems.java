@@ -13,10 +13,12 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import javax.annotation.Nullable;
@@ -70,6 +72,7 @@ public class CookieliciousItems {
     }
 
     @SafeVarargs
+    @SuppressWarnings("SameParameterValue")
     protected static DeferredItem<Item> createCompatItem(String name, Supplier<Item> itemSupplier, Set<String> modids, @Nullable ResourceKey<CreativeModeTab>... creativeModeTabs) {
         DeferredItem<Item> item = HELPER.createItem(name, itemSupplier);
         boolean addToTabs = true;
@@ -142,12 +145,12 @@ public class CookieliciousItems {
         public static final Item.Properties BEETROOT = getCookieProps(Effects.ROOTED);
         public static final Item.Properties PUMPKIN = getCookieProps(Effects.STUFFED);
 
-        public static Item.Properties getCookieProps(MobEffect effect) {
+        public static Item.Properties getCookieProps(Holder<MobEffect> effect) {
             return new Item.Properties().food(new FoodProperties.Builder()
                     .nutrition(2)
                     .saturationModifier(0.1F)
                     .fast()
-                    .effect(() -> new MobEffectInstance(Holder.direct(effect), 120, 0), 1F)
+                    .effect(() -> new MobEffectInstance(effect, 120, 0), 1F)
                     .build());
         }
 
@@ -160,17 +163,33 @@ public class CookieliciousItems {
         }
     }
 
+    /**
+     * Holds mob effect references for easy use later. Any references that ends up
+     * pointing to nothing (likely because of a missing dependency), will point
+     * to {@link MobEffects#MOVEMENT_SPEED} by default.
+     */
     public static class Effects {
-        public static final MobEffect VANILLA_SCENT = getEffect(Neapolitan.MOD_ID, "vanilla_scent");
-        public static final MobEffect SUGAR_RUSH = getEffect(Neapolitan.MOD_ID, "sugar_rush");
-        public static final MobEffect AGILITY = getEffect(Neapolitan.MOD_ID, "agility");
-        public static final MobEffect BERSERKING = getEffect(Neapolitan.MOD_ID, "berserking");
-        public static final MobEffect HARMONY = getEffect(Neapolitan.MOD_ID, "harmony");
-        public static final MobEffect ROOTED = getEffect(CookieliciousCompat.SEASONALS, "rooted");
-        public static final MobEffect STUFFED = getEffect(CookieliciousCompat.SEASONALS, "stuffed");
+        public static final Holder<MobEffect> VANILLA_SCENT = getEffect(Neapolitan.MOD_ID, "vanilla_scent");
+        public static final Holder<MobEffect> SUGAR_RUSH = getEffect(Neapolitan.MOD_ID, "sugar_rush");
+        public static final Holder<MobEffect> AGILITY = getEffect(Neapolitan.MOD_ID, "agility");
+        public static final Holder<MobEffect> BERSERKING = getEffect(Neapolitan.MOD_ID, "berserking");
+        public static final Holder<MobEffect> HARMONY = getEffect(Neapolitan.MOD_ID, "harmony");
+        public static final Holder<MobEffect> ROOTED = getEffect(CookieliciousCompat.SEASONALS, "rooted");
+        public static final Holder<MobEffect> STUFFED = getEffect(CookieliciousCompat.SEASONALS, "stuffed");
 
-        public static MobEffect getEffect(String modId, String id) {
-            return BuiltInRegistries.MOB_EFFECT.get(ResourceLocation.fromNamespaceAndPath(modId, id));
+
+        public static Holder<MobEffect> getEffect(String modId, String id) {
+            Optional<Holder.Reference<MobEffect>> reference = BuiltInRegistries.MOB_EFFECT.getHolder(ResourceLocation.fromNamespaceAndPath(modId, id));
+            if (reference.isPresent()) {
+                return reference.get();
+            } else {
+                // Log a warning in dev environment.
+                if (!FMLEnvironment.production) {
+                    Cookielicious.LOG.warn("Mob effect with ID '{}' does not exist in the registry! " +
+                            "Is it because of a missing dependency or did we mess up?", id);
+                }
+                return MobEffects.MOVEMENT_SPEED;
+            }
         }
     }
 

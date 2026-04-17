@@ -7,5 +7,4 @@ public class CookieItem extends Item {
     public CookieItem(Properties properties) {
         super(properties);
     }
-
 }
