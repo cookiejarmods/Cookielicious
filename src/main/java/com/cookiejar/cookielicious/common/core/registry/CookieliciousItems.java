@@ -16,7 +16,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredItem;
 
@@ -81,7 +80,6 @@ public class CookieliciousItems {
                 break;
             }
         }
-
         if (creativeModeTabs != null && addToTabs) {
             queueForCreativeTabs(item, creativeModeTabs);
         }
@@ -102,13 +100,15 @@ public class CookieliciousItems {
     }
 
     public static void setupTabEditors() {
-        CreativeModeTabContentsPopulator.Entry entry = CreativeModeTabContentsPopulator.mod(Neapolitan.MOD_ID);
+        final CreativeModeTabContentsPopulator.Entry entry = CreativeModeTabContentsPopulator.mod(Neapolitan.MOD_ID);
+        final ResourceLocation strawberryScones = ResourceLocation.fromNamespaceAndPath(CookieliciousCompat.NEAPOLITAN, "strawberry_scones");
 
         // Cookies
         entry.tab(FOOD_AND_DRINKS);
         ALL_COOKIES.forEach((regObj) -> {
             if (TABS_FOR_ITEMS.get(FOOD_AND_DRINKS).contains(regObj)) {
-                entry.addItemsAfter(of(Items.COOKIE), regObj);
+                // Add all the cookies right before Neapolitan's strawberry scones.
+                entry.addItemsBefore(of(BuiltInRegistries.ITEM.get(strawberryScones)), regObj);
             }
         });
 
