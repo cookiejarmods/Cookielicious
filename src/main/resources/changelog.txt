@@ -3,5 +3,6 @@
     - Cookielicious cookies are now added to the Food & Drinks tab right before
       Neapolitan's Strawberry Scones.
     - Refactored tag "forge:cookies" into "neoforge:cookies".
+    - Some internal NBT key changes.
 1.21.1-1.0.0
     - Rewritten for NeoForged 1.21.1.

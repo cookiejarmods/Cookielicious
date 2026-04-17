@@ -38,7 +38,7 @@ public class CEventsListener {
 
     private static final List<Item> AVAILABLE_COOKIES = new ArrayList<>();
 
-    public static final String MOD_DATA_KEY = "Cookielicious:ModData";
+    public static final String MOD_DATA_KEY = "CookieliciousData";
     public static final String COOKIES_OBTAINED_KEY = "CookiesObtained";
     public static final String HAS_BAKE_EM_ALL_KEY = "HasBakeEmAll";
 
@@ -194,11 +194,7 @@ public class CEventsListener {
      */
     private static ContainerListener createCookieListener(ServerPlayer serverPlayer) {
         return new ContainerListener() {
-            {
-                player = serverPlayer;
-            }
-
-            final Player player;
+            final Player player = serverPlayer;
 
             @Override
             public void slotChanged(AbstractContainerMenu containerMenu, int slotId, ItemStack itemStack) {
@@ -212,7 +208,6 @@ public class CEventsListener {
 
             @Override
             public void dataChanged(AbstractContainerMenu containerMenu, int dataId, int data) {
-
             }
         };
     }
