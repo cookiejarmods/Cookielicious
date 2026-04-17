@@ -1,2 +1,6 @@
+1.21.1-1.0.1
+    - Now adding compostables via data map json.
+    - Cookielicious cookies are now added to the Food & Drinks tab right before
+      Neapolitan's Strawberry Scones.
 1.21.1-1.0.0
     - Rewritten for NeoForged 1.21.1.
